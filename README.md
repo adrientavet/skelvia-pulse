@@ -71,7 +71,7 @@ Le titre d'une fenêtre peut contenir des informations sensibles (le sujet d'un 
 
 ## Les écrans
 
-1. **La pastille** : une toute petite barre (mascotte et temps du jour), qui ne change pas quand la souris passe dessus. **Un clic l'ouvre** : temps du jour, état, bouton Pause et bouton « Ouvrir l'application » ; un autre clic, Échap ou un clic ailleurs la referme. Elle apparaît en haut au centre de l'écran. **Cliquez, maintenez et glissez pour la déplacer** : lâchée, elle se colle au bord de l'écran le plus proche, horizontale en haut et en bas, verticale à gauche et à droite, et garde sa place, même après un redémarrage. Pour la remettre en haut : Réglages, ou le menu de l'icône près de l'horloge.
+1. **La pastille** : une toute petite barre (le blip, notre mascotte, et le temps du jour), qui ne change pas quand la souris passe dessus. **Un clic l'ouvre** : temps du jour, état, bouton Pause et bouton « Ouvrir l'application » ; un autre clic, Échap ou un clic ailleurs la referme. Elle apparaît en haut au centre de l'écran. **Cliquez, maintenez et glissez pour la déplacer** : lâchée, elle se colle au bord de l'écran le plus proche, horizontale en haut et en bas, verticale à gauche et à droite, et garde sa place, même après un redémarrage. Pour la remettre en haut : Réglages, ou le menu de l'icône près de l'horloge.
 2. **Aujourd'hui** : temps par type de tâche, par application, par site, et jour par jour sur 7 ou 30 jours.
 3. **Rapport** : bouton « Télécharger mon rapport ». Un fichier HTML d'une page, lisible sans internet, est écrit dans votre dossier Téléchargements. Par défaut, il ne contient pas le nom de vos documents (ils peuvent contenir des noms de clients) : c'est une case à cocher.
 4. **Réglages** : délai d'inactivité, titres, exclusions, règles de regroupement, extension navigateur, effacement des données.
@@ -140,7 +140,7 @@ C'est possible, mais un dirigeant qui l'installe sur le PC d'un salarié a, selo
 ## Licence
 
 - Code : [licence MIT](LICENSE).
-- Nom SKELVIA, logo et mascotte : réservés, voir [TRADEMARKS.md](TRADEMARKS.md).
+- Nom SKELVIA, logo et blips (la mascotte) : réservés, voir [TRADEMARKS.md](TRADEMARKS.md).
 - Composants de tiers (ActivityWatch sous MPL-2.0, polices sous SIL OFL 1.1, Tauri…) : voir [THIRD_PARTY.md](THIRD_PARTY.md).
 
 ---

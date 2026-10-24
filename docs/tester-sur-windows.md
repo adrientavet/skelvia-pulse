@@ -40,10 +40,10 @@ Cochez au fur et à mesure et notez ce qui ne va pas.
 - [ ] Une application lancée « en tant qu'administrateur » : son nom apparaît-il ? (cas connu comme délicat)
 
 ### Pastille
-- [ ] C'est une toute petite barre (mascotte et temps du jour). Passer la souris dessus ne change rien.
+- [ ] C'est une toute petite barre (blip et temps du jour). Passer la souris dessus ne change rien.
 - [ ] Un clic l'ouvre : temps du jour, état, Pause, « Ouvrir l'application ». Un autre clic, Échap, ou un clic dans une autre fenêtre la referme.
 - [ ] « Ouvrir l'application » ouvre la fenêtre principale.
-- [ ] Le bouton Pause passe à « Reprendre » (mascotte en veille, « En pause » dans la barre), et plus rien n'est compté.
+- [ ] Le bouton Pause passe à « Reprendre » (blip en veille, « En pause » dans la barre), et plus rien n'est compté.
 - [ ] Cliquer, maintenir et glisser la barre la déplace, y compris sur un autre écran, sans l'ouvrir.
 - [ ] Lâchée, elle se colle au bord le plus proche : en haut, en bas (au-dessus de la barre des tâches, pas dessous), à gauche, à droite, et reste à l'endroit choisi le long de ce bord.
 - [ ] À gauche et à droite, elle devient verticale ; ouverte, son panneau s'affiche à côté, à sa hauteur. En haut et en bas, elle est horizontale, sans espace vide.

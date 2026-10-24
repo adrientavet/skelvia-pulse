@@ -47,4 +47,4 @@ Voir [docs/architecture.md](docs/architecture.md).
 
 ## Licence des contributions
 
-En proposant une contribution, vous acceptez qu'elle soit publiée sous [licence MIT](LICENSE). N'ajoutez pas de code sous une licence incompatible. Si vous reprenez du code d'un autre projet, gardez sa mention de copyright et ajoutez-la à [THIRD_PARTY.md](THIRD_PARTY.md). Le nom SKELVIA, le logo et la mascotte restent réservés ([TRADEMARKS.md](TRADEMARKS.md)).
+En proposant une contribution, vous acceptez qu'elle soit publiée sous [licence MIT](LICENSE). N'ajoutez pas de code sous une licence incompatible. Si vous reprenez du code d'un autre projet, gardez sa mention de copyright et ajoutez-la à [THIRD_PARTY.md](THIRD_PARTY.md). Le nom SKELVIA, le logo et les blips (la mascotte) restent réservés ([TRADEMARKS.md](TRADEMARKS.md)).

@@ -181,7 +181,7 @@ pub fn render(summary: &Summary, opts: &ReportOptions, fonts: &Fonts) -> String 
     let _ = write!(
         h,
         "<div class=\"eyebrow\">{}<div><b>SKELVIA Pulse</b><br><span>Rapport créé sur ce PC le {}</span></div></div>",
-        mascot::svg(mascot::BLUE, false, 56, "Mascotte SKELVIA"),
+        mascot::svg(mascot::BLUE, false, 56, "Blip SKELVIA"),
         esc(&date_long(opts.generated_at.with_timezone(&Local).date_naive()))
     );
     h.push_str("<h1>Où part votre temps sur l'ordinateur</h1>");
@@ -293,7 +293,7 @@ pub fn render(summary: &Summary, opts: &ReportOptions, fonts: &Fonts) -> String 
             "<aside class=\"audit\">Pour analyser ces chiffres avec Adrien, <a href=\"{AUDIT_URL}\" target=\"_blank\" rel=\"noopener\">réserver un audit de 45 minutes gratuit</a>. Sans engagement, et seulement si vous le souhaitez.</aside>"
         );
     }
-    h.push_str("<footer>SKELVIA Pulse, logiciel libre et gratuit. Le nom SKELVIA et la mascotte sont réservés.</footer>");
+    h.push_str("<footer>SKELVIA Pulse, logiciel libre et gratuit. Le nom SKELVIA et les blips sont réservés.</footer>");
     h.push_str("</main></body></html>");
     h
 }

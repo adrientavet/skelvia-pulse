@@ -342,7 +342,7 @@ export async function vueReglages(root: HTMLElement, status: Status) {
       h(
         "p",
         { class: "muted" },
-        "SKELVIA Pulse est un logiciel libre et gratuit (licence MIT), proposé par SKELVIA. Il repose sur le moteur libre ActivityWatch (licence MPL-2.0). Le nom SKELVIA, le logo et la mascotte sont réservés.",
+        "SKELVIA Pulse est un logiciel libre et gratuit (licence MIT), proposé par SKELVIA. Il repose sur le moteur libre ActivityWatch (licence MPL-2.0). Le nom SKELVIA, le logo et les blips (la mascotte) sont réservés.",
       ),
     ),
   ];

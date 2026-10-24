@@ -7,7 +7,7 @@ import { creerMascotte } from "../mascot";
 const li = (t: string) => h("li", {}, t);
 
 export function vuePremierLancement(root: HTMLElement, ensuite: () => void) {
-  const mascotte = creerMascotte({ titre: "Mascotte SKELVIA" });
+  const mascotte = creerMascotte({ titre: "Blip SKELVIA" });
   const autostart = h("input", { type: "checkbox", id: "autostart", checked: true });
   const commencer = h("button", { type: "button", class: "primary" }, "J'ai compris, commencer");
   commencer.addEventListener("click", async () => {

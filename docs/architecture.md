@@ -36,7 +36,7 @@ Résultat : un seul programme, un seul installeur, sans Python.
 
 | Dossier | Rôle | Tests |
 |---|---|---|
-| `crates/pulse-core` | Réglages, règles, calcul du temps actif, rapport HTML, mascotte SVG. Aucune dépendance système. | `cargo test -p pulse-core` |
+| `crates/pulse-core` | Réglages, règles, calcul du temps actif, rapport HTML, blip (mascotte) en SVG. Aucune dépendance système. | `cargo test -p pulse-core` |
 | `crates/pulse-collector` | Lecture Windows (fenêtre, inactivité, verrouillage). Ne renvoie rien hors Windows. | `cargo check -p pulse-collector --target x86_64-pc-windows-msvc` |
 | `src-tauri` | Application : boucle de collecte, base, serveur local, commandes, icône, pastille. | `cargo test -p skelvia-pulse` |
 | `src` | Interface TypeScript sans framework (pastille, Aujourd'hui, Rapport, Réglages, premier lancement). | `npm run typecheck` |

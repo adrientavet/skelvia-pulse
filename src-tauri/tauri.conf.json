@@ -1,7 +1,7 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "SKELVIA Pulse",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "identifier": "fr.skelvia.pulse",
   "build": {
     "beforeDevCommand": "npm run dev",
@@ -56,7 +56,7 @@
     ],
     "publisher": "SKELVIA",
     "homepage": "https://skelvia.fr",
-    "copyright": "© 2026 Adrien Tavet (SKELVIA). Code sous licence MIT ; nom, logo et mascotte réservés.",
+    "copyright": "© 2026 Adrien Tavet (SKELVIA). Code sous licence MIT ; nom, logo et blips réservés.",
     "category": "Productivity",
     "shortDescription": "Voir où part son temps sur son PC, sans rien envoyer.",
     "longDescription": "SKELVIA Pulse mesure, sur le PC et seulement sur le PC, le temps passé dans chaque application et sur chaque site, et produit un rapport lisible. Aucune donnée n'est envoyée.",

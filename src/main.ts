@@ -21,7 +21,7 @@ let nettoyer: (() => void) | null = null;
 
 function shell(status: Status) {
   // Moins de 48 px : version simplifiée, sinon les points font une tache.
-  const mascotte = creerMascotte({ simple: true, titre: "Mascotte SKELVIA" });
+  const mascotte = creerMascotte({ simple: true, titre: "Blip SKELVIA" });
   const content = h("main", { class: "content" });
   const nav = h("nav", { class: "nav", "aria-label": "Pages" });
   const etat = h("b", {});

@@ -1,4 +1,4 @@
-// La pastille : une toute petite barre (mascotte et temps du jour), toujours
+// La pastille : une toute petite barre (blip et temps du jour), toujours
 // visible, qui ne change pas au survol. Horizontale en haut et en bas de
 // l'écran, verticale à gauche et à droite. Un clic l'ouvre : temps du jour,
 // état, pause, mise à jour éventuelle, et un bouton pour ouvrir
@@ -11,7 +11,7 @@ import { h } from "./dom";
 import { creerMascotte } from "./mascot";
 
 const root = document.getElementById("island")!;
-const mascotte = creerMascotte({ simple: true, titre: "Mascotte SKELVIA" });
+const mascotte = creerMascotte({ simple: true, titre: "Blip SKELVIA" });
 
 // La barre.
 const mini = h("span", { class: "mini" }, "");

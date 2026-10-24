@@ -2,6 +2,11 @@
 
 Les nouveautés de chaque version, de la plus récente à la plus ancienne. Le texte de la version publiée est repris sur la page de téléchargement.
 
+## 0.2.3
+
+- Notre mascotte s'appelle désormais le blip : nouveau dessin en volume dans la pastille, l'application, le rapport et les icônes.
+- Le blip est un dessin fixe, plus léger : il n'est redessiné qu'au passage en pause ou au travail.
+
 ## 0.2.2
 
 - Barre plus compacte et centrée, sans espace vide.
