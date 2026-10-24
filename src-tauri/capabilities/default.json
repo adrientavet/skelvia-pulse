@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Droits des deux fenêtres : écouter les événements de l'application. Les actions passent par les commandes de l'application.",
+  "windows": ["main", "island"],
+  "permissions": ["core:default"]
+}

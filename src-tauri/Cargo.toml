@@ -1,0 +1,40 @@
+[package]
+name = "skelvia-pulse"
+description = "SKELVIA Pulse : voir où part son temps sur son PC, sans rien envoyer."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+
+[lib]
+name = "skelvia_pulse_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+pulse-core = { path = "../crates/pulse-core" }
+pulse-collector = { path = "../crates/pulse-collector" }
+
+tauri = { version = "2", features = ["tray-icon", "image-png"] }
+tauri-plugin-opener = "2"
+tauri-plugin-autostart = "2"
+tauri-plugin-single-instance = "2"
+
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+chrono = { version = "0.4", features = ["serde"] }
+log = "0.4"
+gethostname = "0.4"
+dirs = "6"
+rocket = { version = "0.5", default-features = false }
+uuid = { version = "1", features = ["v4"] }
+
+# Moteur ActivityWatch (MPL-2.0), utilisé sans modification : serveur local
+# pour l'extension navigateur et base de données SQLite. Version figée pour
+# des compilations reproductibles.
+aw-server = { git = "https://github.com/ActivityWatch/aw-server-rust.git", rev = "1d101d4c41b7c434f0e06e89bfceb8abe30ba364" }
+aw-datastore = { git = "https://github.com/ActivityWatch/aw-server-rust.git", rev = "1d101d4c41b7c434f0e06e89bfceb8abe30ba364" }
+aw-models = { git = "https://github.com/ActivityWatch/aw-server-rust.git", rev = "1d101d4c41b7c434f0e06e89bfceb8abe30ba364" }

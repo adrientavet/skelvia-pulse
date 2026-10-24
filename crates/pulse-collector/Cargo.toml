@@ -1,0 +1,17 @@
+[package]
+name = "pulse-collector"
+description = "Lecture de la fenêtre au premier plan et de l'inactivité sous Windows, pour SKELVIA Pulse."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+
+[target.'cfg(windows)'.dependencies]
+windows = { version = "0.58", features = [
+    "Win32_Foundation",
+    "Win32_System_StationsAndDesktops",
+    "Win32_System_SystemInformation",
+    "Win32_System_Threading",
+    "Win32_UI_Input_KeyboardAndMouse",
+    "Win32_UI_WindowsAndMessaging",
+] }

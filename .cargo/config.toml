@@ -1,0 +1,4 @@
+# Le serveur ActivityWatch inclut normalement son tableau de bord web. SKELVIA
+# Pulse ne l'utilise pas : on lui donne une page d'information à la place.
+[env]
+AW_WEBUI_DIR = { value = "src-tauri/aw-webui-stub", relative = true }

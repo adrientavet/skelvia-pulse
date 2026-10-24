@@ -1,0 +1,128 @@
+/*
+ * Direction artistique SKELVIA (reprise de skelvia.fr) : fond noir, cartes
+ * légèrement relevées, texte blanc, un seul accent bleu, coins très
+ * arrondis, mouvements doux.
+ *
+ * Polices sous licence SIL Open Font License 1.1 (voir THIRD_PARTY.md),
+ * incluses dans l'application : aucune requête vers Google Fonts.
+ */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url("./fonts/bricolage-latin.woff2") format("woff2");
+}
+@font-face {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("./fonts/dmsans-latin.woff2") format("woff2");
+}
+
+:root {
+  --dark-950: #060607;
+  --dark-900: #0b0b0c;
+  --dark-800: #151517;
+  --dark-700: #1f1f22;
+  --text: #ffffff;
+  --muted: rgba(255, 255, 255, 0.74);
+  --faint: rgba(255, 255, 255, 0.58);
+  --border: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.22);
+  --input: rgba(255, 255, 255, 0.06);
+  --accent: #2a63f5;
+  --accent-text: #5b8cff;
+  --accent-soft: rgba(47, 107, 255, 0.16);
+  --primary: #2f6bff;
+  --radius: 1.25rem;
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --font-display: "Bricolage Grotesque", "DM Sans", system-ui, sans-serif;
+  --font-sans: "DM Sans", system-ui, "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; height: 100%; }
+
+body {
+  background: var(--dark-900);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  margin: 0;
+  text-wrap: balance;
+}
+h1 { font-size: 34px; }
+h2 { font-size: 22px; }
+h3 { font-size: 17px; letter-spacing: -0.02em; }
+p { margin: 0; }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  border: 1px solid var(--border-strong);
+  background: var(--input);
+  border-radius: 999px;
+  padding: 9px 18px;
+  transition: background 0.3s var(--ease), border-color 0.3s var(--ease), transform 0.3s var(--ease);
+}
+button:hover { background: rgba(255, 255, 255, 0.1); }
+button:active { transform: scale(0.98); }
+button.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 700; }
+button.primary:hover { background: var(--primary); }
+button.danger { border-color: rgba(255, 120, 120, 0.45); }
+button.danger:hover { background: rgba(255, 120, 120, 0.12); }
+button.ghost { border-color: transparent; background: transparent; color: var(--muted); }
+button.ghost:hover { color: var(--text); background: var(--input); }
+button:disabled { opacity: 0.5; cursor: default; }
+
+input, select {
+  font: inherit;
+  color: var(--text);
+  background: var(--input);
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  padding: 8px 12px;
+}
+select option { background: var(--dark-800); }
+input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--accent); padding: 0; }
+
+a { color: var(--accent-text); text-underline-offset: 3px; }
+
+.card {
+  background: var(--dark-800);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+}
+
+.muted { color: var(--muted); }
+.faint { color: var(--faint); font-size: 14px; }
+
+/* Barres horizontales : une seule série, valeurs écrites à côté. */
+.bars { display: flex; flex-direction: column; gap: 14px; }
+.bar-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; align-items: baseline; }
+.bar-row .label { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bar-row .value { font-family: var(--font-display); font-weight: 700; white-space: nowrap; }
+.bar-row .track { grid-column: 1 / -1; height: 8px; border-radius: 999px; background: rgba(255, 255, 255, 0.06); overflow: hidden; }
+.bar-row .fill { height: 100%; background: var(--accent); border-radius: 0 4px 4px 0; transition: width 0.55s var(--ease); }
+.bar-row .meta { grid-column: 1 / -1; color: var(--faint); font-size: 13px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}

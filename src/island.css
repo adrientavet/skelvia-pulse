@@ -1,0 +1,46 @@
+/* La pastille : fenêtre transparente, seule la pilule est dessinée. */
+html, body { background: transparent; overflow: hidden; user-select: none; }
+
+#island {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 4px;
+}
+
+.pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 44px;
+  padding: 0 6px 0 7px;
+  border-radius: 999px;
+  background: rgba(11, 11, 12, 0.94);
+  border: 1px solid var(--border-strong);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+}
+.pill svg { width: 30px; height: 30px; flex: none; }
+.pill .state { display: flex; flex-direction: column; line-height: 1.15; min-width: 86px; }
+.pill .state b { font-family: var(--font-display); font-weight: 700; font-size: 14px; letter-spacing: -0.01em; }
+.pill .state span { font-size: 12px; color: var(--faint); }
+.pill button { padding: 6px 12px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+.pill button svg { width: 12px; height: 12px; }
+
+.panel {
+  width: 316px;
+  margin-top: 8px;
+  padding: 14px 16px;
+  border-radius: 20px;
+  background: rgba(11, 11, 12, 0.96);
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transform: translateY(-6px) scale(0.98);
+  transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+  pointer-events: none;
+}
+.expanded .panel { opacity: 1; transform: none; pointer-events: auto; }
+.panel .total { font-family: var(--font-display); font-weight: 800; font-size: 22px; letter-spacing: -0.03em; }
+.panel p { font-size: 13px; color: var(--muted); margin-top: 2px; }
+.panel .actions { display: flex; gap: 8px; margin-top: 10px; }
+.panel .actions button { padding: 6px 14px; font-size: 13px; }
