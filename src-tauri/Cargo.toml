@@ -38,3 +38,4 @@ uuid = { version = "1", features = ["v4"] }
 aw-server = { git = "https://github.com/ActivityWatch/aw-server-rust.git", rev = "1d101d4c41b7c434f0e06e89bfceb8abe30ba364" }
 aw-datastore = { git = "https://github.com/ActivityWatch/aw-server-rust.git", rev = "1d101d4c41b7c434f0e06e89bfceb8abe30ba364" }
 aw-models = { git = "https://github.com/ActivityWatch/aw-server-rust.git", rev = "1d101d4c41b7c434f0e06e89bfceb8abe30ba364" }
+tauri-plugin-updater = "2"

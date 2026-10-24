@@ -284,7 +284,7 @@ pub fn render(summary: &Summary, opts: &ReportOptions, fonts: &Fonts) -> String 
     if !summary.has_web_data {
         h.push_str("<li>L'extension navigateur n'était pas active sur cette période : les sites web ne sont connus que par le titre de la fenêtre du navigateur.</li>");
     }
-    h.push_str("<li>Ce rapport a été créé sur votre PC. Aucune donnée n'a été envoyée par SKELVIA Pulse.</li>");
+    h.push_str("<li>Ce rapport a été créé sur votre PC. Aucune mesure n'a été envoyée par SKELVIA Pulse.</li>");
     h.push_str("</ul></div></section>");
 
     if opts.include_audit {

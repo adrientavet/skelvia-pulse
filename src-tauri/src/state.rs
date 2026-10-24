@@ -24,6 +24,8 @@ pub struct Status {
     /// Message à montrer si le serveur local n'a pas pu démarrer.
     pub server_message: Option<String>,
     pub first_run_done: bool,
+    /// Nouvelle version trouvée, et où en est son installation.
+    pub update: Option<crate::updater::UpdateStatus>,
 }
 
 pub struct AppState {

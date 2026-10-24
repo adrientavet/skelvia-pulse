@@ -24,7 +24,7 @@ export function vuePremierLancement(root: HTMLElement, ensuite: () => void) {
       h(
         "p",
         { class: "lead" },
-        "SKELVIA Pulse vous montre où part votre temps sur ce PC : quelles applications, quels sites, quels types de tâches. Tout reste sur ce PC. Rien n'est envoyé, ni à SKELVIA, ni à personne.",
+        "SKELVIA Pulse vous montre où part votre temps sur ce PC : quelles applications, quels sites, quels types de tâches. Tout reste sur ce PC. Vos mesures ne sont envoyées ni à SKELVIA, ni à personne.",
       ),
       h(
         "div",
@@ -53,7 +53,7 @@ export function vuePremierLancement(root: HTMLElement, ensuite: () => void) {
             li("Aucune touche tapée, aucun texte saisi, aucun clic."),
             li("Aucun contenu de vos mails, documents ou pages web."),
             li("Les fenêtres ouvertes en arrière-plan."),
-            li("Rien n'est envoyé sur internet : pas de compte, pas de serveur SKELVIA."),
+            li("Aucune mesure envoyée sur internet : pas de compte, pas de serveur SKELVIA. Seule connexion : vérifier sur GitHub s'il existe une nouvelle version (désactivable dans Réglages)."),
           ),
         ),
         h(

@@ -246,3 +246,25 @@ pub fn island_expand(app: AppHandle, expanded: bool) -> bool {
 pub fn reset_island(app: AppHandle) {
     crate::island::reset(&app);
 }
+
+/// Version installée, affichée dans les réglages.
+#[tauri::command]
+pub fn app_version(app: AppHandle) -> String {
+    app.package_info().version.to_string()
+}
+
+/// Vérification demandée depuis les réglages. Renvoie un message à afficher.
+#[tauri::command]
+pub async fn check_updates_now(app: AppHandle) -> Result<String, String> {
+    match crate::updater::check(&app).await {
+        Ok(Some(v)) => Ok(format!("La version {v} est disponible.")),
+        Ok(None) => Ok(format!("Vous avez la dernière version ({}).", app.package_info().version)),
+        Err(e) => Err(format!("Vérification impossible pour l'instant (pas d'internet ?). Détail : {e}")),
+    }
+}
+
+/// Télécharge et installe la nouvelle version (après un clic de l'utilisateur).
+#[tauri::command]
+pub async fn install_update(app: AppHandle) -> Result<(), String> {
+    crate::updater::install(&app).await
+}

@@ -1,7 +1,7 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "SKELVIA Pulse",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "identifier": "fr.skelvia.pulse",
   "build": {
     "beforeDevCommand": "npm run dev",
@@ -32,7 +32,7 @@
         "label": "island",
         "title": "SKELVIA Pulse (pastille)",
         "url": "island.html",
-        "width": 256,
+        "width": 268,
         "height": 52,
         "resizable": false,
         "decorations": false,
@@ -50,7 +50,10 @@
   },
   "bundle": {
     "active": true,
-    "targets": ["nsis", "msi"],
+    "targets": [
+      "nsis",
+      "msi"
+    ],
     "publisher": "SKELVIA",
     "homepage": "https://skelvia.fr",
     "copyright": "© 2026 Adrien Tavet (SKELVIA). Code sous licence MIT ; nom, logo et mascotte réservés.",
@@ -68,11 +71,25 @@
     "windows": {
       "nsis": {
         "installMode": "currentUser",
-        "languages": ["French"],
+        "languages": [
+          "French"
+        ],
         "displayLanguageSelector": false
       },
       "wix": {
         "language": "fr-FR"
+      }
+    },
+    "createUpdaterArtifacts": true
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IERCMzA1OUNCNzI3RkJBRDAKUldUUXVuOXl5MWt3MjRHVzRtakFpQW5mdnl2aXFDb0pDMllmcWxNbWtiSjZUQmZudUl4RDNlbkgK",
+      "endpoints": [
+        "https://github.com/adrientavet/skelvia-pulse/releases/latest/download/latest.json"
+      ],
+      "windows": {
+        "installMode": "passive"
       }
     }
   }

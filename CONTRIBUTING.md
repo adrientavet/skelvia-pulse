@@ -6,7 +6,7 @@ Merci de votre intérêt. Les contributions sont bienvenues : corrections, tests
 
 Toute contribution doit respecter ces règles, sans exception :
 
-1. **Tout reste sur le PC.** Aucune requête réseau vers l'extérieur, aucune télémétrie, aucun compte, aucune bibliothèque qui en ajoute.
+1. **Tout reste sur le PC.** Aucune requête réseau vers l'extérieur, aucune télémétrie, aucun compte, aucune bibliothèque qui en ajoute. Seule exception : la vérification des mises à jour (`src-tauri/src/updater.rs`), qui ne lit qu'un fichier public, n'envoie aucune mesure et peut être coupée.
 2. **Le minimum de données.** Application, titre de fenêtre, domaine, durée, actif ou non. Jamais de capture d'écran, de touches, de clics, de contenu de documents ou de mails.
 3. **Toujours visible.** La pastille et l'icône restent visibles ; la pause reste à un clic. Pas de mode caché.
 4. **Simple pour un dirigeant non technicien.** Aucun réglage obligatoire, pas de jargon dans l'interface.

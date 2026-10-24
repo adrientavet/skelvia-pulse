@@ -28,7 +28,7 @@ Licence vérifiée dans les fichiers `OFL.txt` du dépôt [google/fonts](https:/
 
 ## Tauri et autres bibliothèques
 
-- **Tauri** (https://tauri.app) : MIT ou Apache-2.0, au choix.
+- **Tauri** (https://tauri.app) : MIT ou Apache-2.0, au choix. Extensions officielles utilisées : opener, autostart, single-instance, updater (mêmes licences).
 - **Rocket**, **windows-rs**, **serde**, **chrono** et la plupart des bibliothèques Rust : MIT ou Apache-2.0.
 - **Vite**, **TypeScript**, **@tauri-apps/api** : MIT ou Apache-2.0.
 

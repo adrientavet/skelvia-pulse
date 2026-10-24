@@ -15,8 +15,10 @@ use crate::state::AppState;
 
 pub const LABEL: &str = "island";
 /// Tailles en pixels « logiques » (avant mise à l'échelle de Windows).
-const COMPACT: (f64, f64) = (256.0, 52.0);
-const EXPANDED: (f64, f64) = (332.0, 232.0);
+const COMPACT: (f64, f64) = (268.0, 52.0);
+/// Assez haute pour le bloc « Nouvelle version » ; la fenêtre est
+/// transparente autour du panneau.
+const EXPANDED: (f64, f64) = (332.0, 272.0);
 const TOP_MARGIN: f64 = 6.0;
 /// Les déplacements reçus juste après un placement par le programme sont
 /// ignorés : ce ne sont pas des glissements de l'utilisateur.
@@ -194,7 +196,7 @@ mod tests {
     #[test]
     fn default_is_top_center_of_primary() {
         let (pos, s) = compact_origin(None, &[SCREEN], SCREEN);
-        assert_eq!(pos, [(1920 - 256) / 2, 6]);
+        assert_eq!(pos, [(1920 - 268) / 2, 6]);
         assert_eq!(s, SCREEN);
     }
 
@@ -204,17 +206,17 @@ mod tests {
         assert_eq!(pos, [100, 900]);
         // Dépasse à droite (centre encore sur l'écran) : ramenée entièrement sur l'écran.
         let (pos, _) = compact_origin(Some([1700, 500]), &[SCREEN], SCREEN);
-        assert_eq!(pos, [1920 - 256, 500]);
+        assert_eq!(pos, [1920 - 268, 500]);
         // Centre hors de tout écran : position par défaut.
         let (pos, _) = compact_origin(Some([1800, 500]), &[SCREEN], SCREEN);
-        assert_eq!(pos, [(1920 - 256) / 2, 6]);
+        assert_eq!(pos, [(1920 - 268) / 2, 6]);
     }
 
     #[test]
     fn position_on_a_missing_screen_falls_back_to_default() {
         // Deuxième écran débranché depuis.
         let (pos, _) = compact_origin(Some([2500, 300]), &[SCREEN], SCREEN);
-        assert_eq!(pos, [(1920 - 256) / 2, 6]);
+        assert_eq!(pos, [(1920 - 268) / 2, 6]);
         // Écran présent, avec sa propre mise à l'échelle.
         let (pos, s) = compact_origin(Some([2500, 300]), &[SCREEN, RIGHT], SCREEN);
         assert_eq!(pos, [2500, 300]);
@@ -225,8 +227,8 @@ mod tests {
     fn expands_down_or_up_without_moving_the_pill() {
         let (origin, size, up) = expanded_rect([500, 100], SCREEN);
         assert!(!up);
-        assert_eq!(origin, [500 - (332 - 256) / 2, 100]);
-        assert_eq!(size, [332, 232]);
+        assert_eq!(origin, [500 - (332 - 268) / 2, 100]);
+        assert_eq!(size, [332, 272]);
         // Près du bas de l'écran : s'ouvre vers le haut, la pilule garde sa place.
         let (origin, size, up) = expanded_rect([500, 1000], SCREEN);
         assert!(up);

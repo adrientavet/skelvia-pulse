@@ -33,6 +33,8 @@ body { background: var(--dark-900); }
 .side .status b { font-family: var(--font-display); display: block; }
 .side .status p { font-size: 13px; color: var(--faint); margin: 2px 0 12px; }
 .side .status button { width: 100%; }
+.side .status.update { margin-top: 12px; border-color: rgba(47, 107, 255, 0.45); background: linear-gradient(180deg, rgba(47, 107, 255, 0.12), var(--dark-800)); }
+[hidden] { display: none !important; }
 
 .content { overflow-y: auto; padding: 36px 40px 56px; }
 .content > * + * { margin-top: 20px; }

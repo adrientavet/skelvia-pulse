@@ -57,6 +57,10 @@ pub struct Settings {
     /// Position de la pastille choisie par l'utilisateur (coin haut gauche,
     /// en pixels de l'écran). `None` : en haut, au centre.
     pub island_position: Option<[i32; 2]>,
+    /// Vérifier de temps en temps s'il existe une nouvelle version. C'est
+    /// la seule connexion à internet de l'application : elle télécharge un
+    /// petit fichier public sur GitHub et n'envoie aucune mesure.
+    pub check_updates: bool,
 }
 
 impl Default for Settings {
@@ -69,6 +73,7 @@ impl Default for Settings {
             first_run_done: false,
             paused: false,
             island_position: None,
+            check_updates: true,
         }
     }
 }
@@ -102,6 +107,8 @@ mod tests {
         assert!(s.paused);
         assert_eq!(s.idle_timeout_secs, DEFAULT_IDLE_TIMEOUT_SECS);
         assert!(!s.rules.is_empty());
+        // Réglages écrits par une version sans mises à jour automatiques.
+        assert!(s.check_updates);
     }
 
     #[test]

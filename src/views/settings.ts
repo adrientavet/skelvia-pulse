@@ -73,6 +73,26 @@ export async function vueReglages(root: HTMLElement, status: Status) {
     s.record_titles = titres.checked;
     enregistrer();
   });
+  // Mises à jour.
+  const version = await api.version().catch(() => "");
+  const majAuto = h("input", { type: "checkbox", id: "maj", checked: s.check_updates });
+  majAuto.addEventListener("change", () => {
+    s.check_updates = majAuto.checked;
+    enregistrer();
+  });
+  const resultatMaj = h("span", { class: "faint", role: "status" });
+  const verifier = h("button", { type: "button" }, "Vérifier maintenant");
+  verifier.addEventListener("click", async () => {
+    verifier.toggleAttribute("disabled", true);
+    resultatMaj.textContent = "Vérification…";
+    try {
+      resultatMaj.textContent = await api.checkUpdates();
+    } catch (e) {
+      resultatMaj.textContent = String(e);
+    }
+    verifier.toggleAttribute("disabled", false);
+  });
+
   const demarrage = h("input", { type: "checkbox", id: "demarrage", checked: autostartActif });
   demarrage.addEventListener("change", async () => {
     try {
@@ -237,6 +257,25 @@ export async function vueReglages(root: HTMLElement, status: Status) {
         demarrage,
         h("span", {}, h("b", {}, "Démarrer avec Windows"), h("br"), h("span", { class: "faint" }, "SKELVIA Pulse démarre discrètement : la pastille et l'icône près de l'horloge restent visibles.")),
       ),
+    ),
+    h(
+      "section",
+      { class: "card" },
+      h("h2", {}, "Mises à jour"),
+      h("p", { class: "muted" }, `Version installée : ${version}. Quand une nouvelle version existe, la pastille affiche « mise à jour » : un clic l'installe. SKELVIA Pulse se ferme quelques secondes puis se relance, et vos mesures sont gardées.`),
+      h(
+        "label",
+        { class: "check field", for: "maj" },
+        majAuto,
+        h(
+          "span",
+          {},
+          h("b", {}, "Vérifier s'il existe une nouvelle version"),
+          h("br"),
+          h("span", { class: "faint" }, "C'est la seule connexion à internet de SKELVIA Pulse : environ toutes les 6 heures, il lit un petit fichier public sur GitHub, le site où le logiciel est publié. Aucune mesure, aucun nom de document ni de site n'est envoyé. Comme pour toute visite d'un site, GitHub voit l'adresse internet de votre connexion."),
+        ),
+      ),
+      h("div", { class: "actions" }, verifier, resultatMaj),
     ),
     h(
       "section",

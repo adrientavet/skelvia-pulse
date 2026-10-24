@@ -13,6 +13,7 @@ export interface Settings {
   first_run_done: boolean;
   paused: boolean;
   island_position: [number, number] | null;
+  check_updates: boolean;
 }
 
 export interface Status {
@@ -22,6 +23,17 @@ export interface Status {
   serverOk: boolean;
   serverMessage: string | null;
   firstRunDone: boolean;
+  update: UpdateStatus | null;
+}
+
+/** Nouvelle version trouvée, et où en est son installation. */
+export interface UpdateStatus {
+  version: string;
+  notes: string | null;
+  step: "disponible" | "telechargement" | "installation" | "erreur";
+  /** De 0 à 1, si la taille est connue. */
+  progress: number | null;
+  error: string | null;
 }
 
 export interface Entry { label: string; secs: number }
@@ -59,6 +71,11 @@ export const api = {
   /** Renvoie vrai si la pastille s'ouvre vers le haut (posée en bas de l'écran). */
   islandExpand: (expanded: boolean) => invoke<boolean>("island_expand", { expanded }),
   resetIsland: () => invoke<void>("reset_island"),
+  version: () => invoke<string>("app_version"),
+  /** Renvoie le message à afficher (« Vous avez la dernière version »…). */
+  checkUpdates: () => invoke<string>("check_updates_now"),
+  /** Sous Windows, l'application se ferme puis se relance toute seule. */
+  installUpdate: () => invoke<void>("install_update"),
   onStatus: (cb: (s: Status) => void): Promise<UnlistenFn> => listen<Status>("pulse://status", (e) => cb(e.payload)),
 };
 
@@ -75,4 +92,18 @@ export function duree(secs: number): string {
 
 export function dureeCourte(secs: number): string {
   return secs < 60 ? "0 min" : duree(secs);
+}
+
+/** Texte court de l'état d'une mise à jour, commun à la pastille et à la fenêtre. */
+export function texteMiseAJour(u: UpdateStatus): string {
+  switch (u.step) {
+    case "telechargement":
+      return u.progress === null ? "Téléchargement de la mise à jour…" : `Téléchargement de la mise à jour… ${Math.round(u.progress * 100)} %`;
+    case "installation":
+      return "Installation : SKELVIA Pulse se ferme puis se relance.";
+    case "erreur":
+      return u.error ?? "La mise à jour n'a pas pu être installée.";
+    default:
+      return `La version ${u.version} est prête à être installée.`;
+  }
 }

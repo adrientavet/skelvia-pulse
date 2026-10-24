@@ -46,8 +46,10 @@ jobs:
       - run: npm run build
       - name: Tests sous Windows
         run: cargo test --workspace --locked
+      # Installeurs d'essai, sans les fichiers de mise à jour (la clé de
+      # signature ne sert qu'à la publication, voir publication.yml).
       - name: Compilation des installeurs
-        run: npm run tauri build
+        run: npm run tauri build -- --no-sign --config src-tauri/tauri.essai.conf.json
       - uses: actions/upload-artifact@v4
         with:
           name: skelvia-pulse-windows

@@ -9,8 +9,10 @@ Le dépôt contient un workflow GitHub Actions (`.github/workflows/ci.yml`) qui 
 1. Sur GitHub, ouvrez l'onglet **Actions** du dépôt, puis le dernier passage réussi de « CI ».
 2. En bas de la page, section **Artifacts**, téléchargez **`skelvia-pulse-windows`** (il faut être connecté à GitHub).
 3. Décompressez le fichier zip. Vous y trouvez :
-   - `SKELVIA Pulse_0.1.0_x64-setup.exe` (installeur conseillé, sans droits administrateur) ;
-   - `SKELVIA Pulse_0.1.0_x64_fr-FR.msi` (installeur MSI, pour un déploiement par un informaticien).
+   - `SKELVIA Pulse_<version>_x64-setup.exe` (installeur conseillé, sans droits administrateur) ;
+   - `SKELVIA Pulse_<version>_x64_fr-FR.msi` (installeur MSI, pour un déploiement par un informaticien).
+
+Ces installeurs d'essai fonctionnent normalement. Les versions publiées sur la page de téléchargement (« Releases ») sont les mêmes, avec en plus les fichiers signés qui servent aux mises à jour automatiques.
 
 Vous pouvez aussi lancer la compilation à la main depuis l'onglet Actions (« Run workflow »).
 
@@ -26,6 +28,7 @@ Cochez au fur et à mesure et notez ce qui ne va pas.
 ### Premier lancement
 - [ ] Avant de cliquer sur « J'ai compris, commencer » : pas de pastille, et rien n'apparaît dans Aujourd'hui.
 - [ ] Après le clic : la pastille apparaît en haut au centre de l'écran, avec « Enregistre ».
+- [ ] Avant ce clic, aucune vérification de mise à jour n'a lieu.
 - [ ] L'icône près de l'horloge est visible (parfois dans la flèche « icônes cachées » de la barre des tâches).
 
 ### Mesure
@@ -45,6 +48,15 @@ Cochez au fur et à mesure et notez ce qui ne va pas.
 - [ ] Après avoir quitté puis relancé SKELVIA Pulse, elle revient à la position choisie.
 - [ ] Posée en bas de l'écran, elle s'ouvre vers le haut au survol, sans sortir de l'écran.
 - [ ] « Remettre la pastille en haut de l'écran » (Réglages, ou menu de l'icône) la ramène en haut au centre.
+
+### Mises à jour
+Ces vérifications demandent deux versions publiées (par exemple 0.2.0 installée, puis 0.2.1 publiée).
+- [ ] Dans Réglages > Mises à jour, la version installée est affichée, et « Vérifier maintenant » répond (« dernière version » ou « version … disponible »).
+- [ ] Après publication d'une version plus récente : au plus tard au redémarrage de SKELVIA Pulse (vérification 30 secondes après le démarrage), la pastille affiche « mise à jour ».
+- [ ] Un clic sur « mise à jour » : téléchargement (pourcentage dans la pastille), fermeture, petite fenêtre de progression de l'installeur, puis relance automatique. Noter si SmartScreen ou un antivirus intervient.
+- [ ] Après la relance : la nouvelle version est affichée dans Réglages, les mesures d'avant sont toujours là, la pastille est à sa place.
+- [ ] Sans internet : « Vérifier maintenant » affiche un message clair, sans blocage.
+- [ ] Option décochée : plus de vérification automatique.
 
 ### Navigateur
 - [ ] Installez l'extension via les boutons « Pour Chrome », « Pour Edge » ou « Pour Firefox ». Noter les étapes réelles (surtout pour Edge).

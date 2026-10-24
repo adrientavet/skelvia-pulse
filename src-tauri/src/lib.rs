@@ -2,7 +2,9 @@
 //!
 //! Tout reste sur le PC : base locale (moteur ActivityWatch), réglages dans
 //! un fichier JSON, rapport écrit dans le dossier Téléchargements. Aucun
-//! compte, aucun serveur distant, aucune télémétrie.
+//! compte, aucun serveur SKELVIA, aucune télémétrie. Seule connexion : la
+//! vérification des mises à jour sur GitHub (voir `updater.rs`), sans
+//! aucune mesure envoyée, et qui peut être coupée.
 
 mod collector;
 mod commands;
@@ -11,6 +13,7 @@ mod server;
 mod state;
 mod store;
 mod tray;
+mod updater;
 
 use std::sync::atomic::AtomicBool;
 use std::sync::{Arc, Mutex};
@@ -81,8 +84,10 @@ pub fn run() {
             Some(vec![AUTOSTART_ARG]),
         ))
         .plugin(tauri_plugin_opener::init())
+        .plugin(tauri_plugin_updater::Builder::new().build())
         .manage(state)
         .manage(island::Island::default())
+        .manage(updater::Pending::default())
         .invoke_handler(tauri::generate_handler![
             commands::get_status,
             commands::set_paused,
@@ -101,6 +106,9 @@ pub fn run() {
             commands::show_main_window,
             commands::island_expand,
             commands::reset_island,
+            commands::app_version,
+            commands::check_updates_now,
+            commands::install_update,
         ])
         .setup(move |app| {
             tray::create(app.handle())?;
@@ -117,6 +125,7 @@ pub fn run() {
                 show_main(app.handle());
             }
             collector::spawn(app.handle().clone());
+            updater::spawn(app.handle().clone());
             Ok(())
         })
         .on_window_event(|window, event| {

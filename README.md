@@ -1,25 +1,25 @@
 # SKELVIA Pulse
 
-**Voir où part votre temps sur votre PC. Sans rien envoyer.**
+**Voir où part votre temps sur votre PC. Vos mesures restent chez vous.**
 
 SKELVIA Pulse est un petit logiciel gratuit et libre pour Windows 10 et 11. Il tourne en arrière-plan et mesure, **sur votre PC uniquement**, le temps passé dans chaque application, sur chaque site et dans chaque document. Il range ce temps par type de tâche (devis, factures, mails, plans et CCTP, recherche de fournisseurs…) et vous donne un rapport clair, par exemple : « 6 h par semaine sur les mails, 3 h sur les devis, 2 h sur des PDF de CCTP ».
 
 Il est proposé par [SKELVIA](https://skelvia.fr), qui installe des assistants IA administratifs dans les TPE et PME du bâtiment.
 
-> ⚠️ Version 0.1, en cours de test. Elle n'a pas encore été essayée sur un vrai PC Windows : voir [Tester sur Windows](docs/tester-sur-windows.md).
+> ⚠️ Version 0.2, en cours de test. Elle n'a pas encore été essayée sur un vrai PC Windows : voir [Tester sur Windows](docs/tester-sur-windows.md).
 
 ---
 
 ## En bref
 
-- **Tout reste sur votre PC.** Pas de compte, pas de serveur SKELVIA, aucune télémétrie. Le rapport est un fichier que vous gardez, imprimez ou transmettez, comme vous voulez.
+- **Tout reste sur votre PC.** Pas de compte, pas de serveur SKELVIA, aucune télémétrie. Le rapport est un fichier que vous gardez, imprimez ou transmettez, comme vous voulez. Seule connexion à internet : vérifier s'il existe une nouvelle version (voir [Mises à jour](#mises-à-jour)).
 - **Pas d'espionnage.** Pas de capture d'écran, pas de touches tapées, pas de contenu de mails ou de documents.
 - **Toujours visible.** Une pastille, que vous placez où vous voulez sur l'écran, montre l'état (« Enregistre » ou « En pause ») avec un bouton Pause. Une icône reste près de l'horloge de Windows.
 - **Aucun réglage obligatoire.** On installe, on lit l'écran d'accueil, c'est parti.
 
 ## Installer
 
-1. Téléchargez le fichier **`SKELVIA Pulse_0.1.0_x64-setup.exe`** (lien donné par SKELVIA, ou page « Releases » de ce dépôt quand elle sera publique).
+1. Téléchargez le fichier **`skelvia-pulse_<version>_x64-setup.exe`** sur la page de téléchargement (« Releases ») indiquée par SKELVIA.
 2. Double-cliquez dessus. L'installation se fait pour votre compte Windows seulement et ne demande pas de mot de passe administrateur.
 3. **Windows affiche sans doute un avertissement bleu « Windows a protégé votre ordinateur »** (SmartScreen). C'est normal pour un logiciel récent qui n'est pas encore signé numériquement : voir [l'avertissement SmartScreen](#lavertissement-smartscreen) ci-dessous.
 4. Au premier lancement, un écran explique ce qui est enregistré et ce qui ne l'est pas. Rien n'est enregistré avant que vous cliquiez sur « J'ai compris, commencer ».
@@ -60,7 +60,7 @@ Le titre d'une fenêtre peut contenir des informations sensibles (le sujet d'un 
 - Aucun contenu de vos mails, documents ou pages web.
 - Les fenêtres ouvertes en arrière-plan : seule celle que vous utilisez compte.
 - La navigation privée : non comptée, et ce que l'extension en envoie est effacé.
-- Rien n'est envoyé sur internet.
+- Aucune mesure n'est envoyée sur internet.
 
 ## Comment le temps est compté
 
@@ -112,6 +112,18 @@ Si ActivityWatch est déjà installé sur le PC, il occupe ce port : l'extension
 3. Supprimez le dossier **`%LOCALAPPDATA%\SKELVIA Pulse`** (tapez ce chemin dans la barre d'adresse de l'Explorateur de fichiers). Il contient la base de données et les réglages.
 4. Supprimez aussi, s'il existe, le dossier **`%LOCALAPPDATA%\fr.skelvia.pulse`**. Il contient le cache d'affichage de Windows (WebView2), pas vos mesures.
 
+## Mises à jour
+
+Quand une nouvelle version existe, la pastille affiche **« mise à jour »**. Un clic (sur ce mot, ou sur « Mettre à jour » quand la pastille est ouverte) suffit : SKELVIA Pulse télécharge la nouvelle version, se ferme quelques secondes pendant l'installation, puis se relance. Vos mesures et vos réglages sont gardés. Rien ne s'installe sans votre clic.
+
+Pour le savoir, SKELVIA Pulse lit environ toutes les 6 heures un petit fichier public (`latest.json`) sur GitHub, le site où le logiciel est publié. C'est **la seule connexion à internet** de l'application :
+
+- aucune mesure, aucun nom de document ni de site n'est envoyé, et l'adresse lue ne contient ni votre version ni un identifiant ;
+- comme pour toute visite d'un site, GitHub voit l'adresse internet de votre connexion ;
+- le fichier téléchargé doit porter la signature numérique de SKELVIA, sinon il est refusé ;
+- rien n'est vérifié avant que vous ayez accepté l'écran d'accueil ;
+- vous pouvez couper cette vérification dans **Réglages > Mises à jour**, et vérifier à la main avec « Vérifier maintenant ».
+
 ## Installer SKELVIA Pulse sur le PC d'un salarié
 
 C'est possible, mais un dirigeant qui l'installe sur le PC d'un salarié a, selon toute vraisemblance, des obligations d'**information** et de **proportionnalité** (RGPD, recommandations de la CNIL, Code du travail). Lisez [Usage en entreprise](docs/usage-en-entreprise.md) et faites valider votre projet. Ce document n'est pas un avis juridique.
@@ -120,6 +132,8 @@ C'est possible, mais un dirigeant qui l'installe sur le PC d'un salarié a, selo
 
 - [Usage en entreprise (RGPD, CNIL)](docs/usage-en-entreprise.md)
 - [Tester sur Windows](docs/tester-sur-windows.md)
+- [Publier une version](docs/publier-une-version.md)
+- [Nouveautés](NOUVEAUTES.md)
 - [Fonctionnement technique](docs/architecture.md)
 - [Contribuer](CONTRIBUTING.md)
 

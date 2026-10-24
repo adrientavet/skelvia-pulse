@@ -1,0 +1,62 @@
+# Publication d'une version : déclenchée par une étiquette « v0.2.0 ».
+# Compile les installeurs sous Windows, les signe avec la clé des mises à
+# jour, et crée la page de téléchargement GitHub avec latest.json, le fichier
+# que SKELVIA Pulse lit pour proposer la mise à jour.
+#
+# Réglages du dépôt nécessaires (voir docs/publier-une-version.md) :
+# - secret TAURI_SIGNING_PRIVATE_KEY : la clé privée des mises à jour ;
+# - si les installeurs sont publiés dans un autre dépôt : variable
+#   RELEASES_REPO (propriétaire/dépôt) et secret RELEASES_TOKEN.
+name: Publication
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    name: Publier la version
+    runs-on: windows-latest
+    env:
+      RELEASES_REPO: ${{ vars.RELEASES_REPO || github.repository }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Clé de signature présente
+        shell: bash
+        env:
+          KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+        run: |
+          if [ -z "$KEY" ]; then
+            echo "::error::Le secret TAURI_SIGNING_PRIVATE_KEY manque (voir docs/publier-une-version.md)."
+            exit 1
+          fi
+      - run: npm ci
+      - run: npm run build
+      - name: Tests sous Windows
+        run: cargo test --workspace --locked
+      - name: Compilation et signature des installeurs
+        env:
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+        run: npm run tauri build
+      - name: Préparation des fichiers
+        shell: bash
+        run: node scripts/preparer-publication.mjs "$GITHUB_REF_NAME" "$RELEASES_REPO"
+      - name: Page de téléchargement
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.RELEASES_TOKEN || github.token }}
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          gh release create "$GITHUB_REF_NAME" publication/* \
+            --repo "$RELEASES_REPO" \
+            --title "SKELVIA Pulse $version" \
+            --notes-file notes-de-version.md

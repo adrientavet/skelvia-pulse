@@ -19,7 +19,8 @@
 │  %LOCALAPPDATA%\SKELVIA Pulse\  donnees.sqlite, reglages.json                │
 │  Téléchargements\               Rapport SKELVIA Pulse AAAA-MM-JJ.html        │
 └──────────────────────────────────────────────────────────────────────────────┘
-                     Aucune connexion vers l'extérieur.
+        Seule connexion vers l'extérieur : lecture de latest.json sur GitHub
+        (mises à jour, désactivable, aucune mesure envoyée).
 ```
 
 ## Pourquoi cette architecture
@@ -55,6 +56,7 @@ Résultat : un seul programme, un seul installeur, sans Python.
 - Comme dans ActivityWatch, un autre programme du même PC peut lire l'API locale. ActivityWatch limite ce que les extensions de navigateur peuvent lire (`extension_cors.rs`), mais n'importe quel programme lancé sur le PC peut interroger `127.0.0.1:5600`. C'est une limite connue, à garder en tête.
 - Politique de sécurité du contenu (CSP) stricte dans les fenêtres : aucun script ni ressource extérieure.
 - Le rapport HTML n'a aucune ressource extérieure (polices incluses). Le seul lien est celui, facultatif, vers l'audit SKELVIA.
+- **Mises à jour** (`updater.rs`, extension officielle `tauri-plugin-updater`) : 30 secondes après le démarrage puis toutes les 6 heures, si l'option est active et l'écran d'accueil accepté, lecture de `https://github.com/<dépôt>/releases/latest/download/latest.json`. L'adresse est fixe : ni version ni identifiant. L'installeur n'est téléchargé qu'après un clic, et il est refusé si sa signature ne correspond pas à la clé publique inscrite dans `tauri.conf.json` (`plugins > updater > pubkey`). Sous Windows, l'application se ferme, l'installeur tourne en mode « passif » (barre de progression seulement), puis relance l'application. Publication : voir [Publier une version](publier-une-version.md).
 
 ## Données sur le disque
 

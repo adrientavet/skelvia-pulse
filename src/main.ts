@@ -1,5 +1,5 @@
 // Fenêtre principale : premier lancement, puis Aujourd'hui, Rapport, Réglages.
-import { api, type Status } from "./api";
+import { api, texteMiseAJour, type Status } from "./api";
 import { h } from "./dom";
 import { creerMascotte } from "./mascot";
 import { vueAujourdhui } from "./views/today";
@@ -27,6 +27,11 @@ function shell(status: Status) {
   const etat = h("b", {});
   const detail = h("p", {});
   const bouton = h("button", { type: "button" });
+  // Nouvelle version disponible : un clic l'installe.
+  const titreMaj = h("b", {});
+  const texteMaj = h("p", {});
+  const boutonMaj = h("button", { type: "button", class: "primary", onclick: () => api.installUpdate().catch(() => {}) }, "Mettre à jour");
+  const blocMaj = h("div", { class: "status update", role: "status", hidden: true }, titreMaj, texteMaj, boutonMaj);
 
   const afficherEtat = (s: Status) => {
     mascotte.setVeille(s.paused || s.idle);
@@ -38,6 +43,16 @@ function shell(status: Status) {
         : "Seule la fenêtre au premier plan est mesurée.";
     bouton.textContent = s.paused ? "Reprendre" : "Mettre en pause";
     bouton.className = s.paused ? "primary" : "";
+    const u = s.update;
+    blocMaj.hidden = u === null;
+    if (u) {
+      const enCours = u.step === "telechargement" || u.step === "installation";
+      titreMaj.textContent = u.step === "erreur" ? "Mise à jour non installée" : `Nouvelle version ${u.version}`;
+      texteMaj.textContent =
+        u.step === "disponible" ? "SKELVIA Pulse se ferme quelques secondes, puis se relance. Vos mesures sont gardées." : texteMiseAJour(u);
+      boutonMaj.textContent = u.step === "erreur" ? "Réessayer" : enCours ? "En cours…" : "Mettre à jour";
+      boutonMaj.toggleAttribute("disabled", enCours);
+    }
     current = s;
   };
   let current = status;
@@ -70,6 +85,7 @@ function shell(status: Status) {
         h("div", { class: "brand" }, mascotte.svg, h("b", {}, "SKELVIA Pulse", h("span", {}, "Tout reste sur ce PC"))),
         nav,
         h("div", { class: "status", role: "status" }, etat, detail, bouton),
+        blocMaj,
       ),
       content,
     ),
