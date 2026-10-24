@@ -51,6 +51,15 @@ export interface Summary {
 }
 export type Range = "today" | "week" | "month";
 
+/** Forme de la pastille : bord de l'écran où elle est collée, ouverte ou
+ * non, et place de la barre dans la fenêtre (en pixels). */
+export interface IslandLayout {
+  edge: "haut" | "bas" | "gauche" | "droite";
+  expanded: boolean;
+  barLeft: number;
+  barTop: number;
+}
+
 export const api = {
   status: () => invoke<Status>("get_status"),
   setPaused: (paused: boolean) => invoke<void>("set_paused", { paused }),
@@ -69,7 +78,9 @@ export const api = {
   openAuditPage: () => invoke<void>("open_audit_page"),
   showMain: () => invoke<void>("show_main_window"),
   /** Ouvre ou referme la pastille ; dit où se trouve la barre dans la fenêtre. */
-  islandExpand: (expanded: boolean) => invoke<{ up: boolean; barLeft: number } | null>("island_expand", { expanded }),
+  islandExpand: (expanded: boolean) => invoke<IslandLayout | null>("island_expand", { expanded }),
+  islandLayout: () => invoke<IslandLayout | null>("island_layout"),
+  onIslandLayout: (cb: (l: IslandLayout) => void): Promise<UnlistenFn> => listen<IslandLayout>("pulse://island", (e) => cb(e.payload)),
   resetIsland: () => invoke<void>("reset_island"),
   version: () => invoke<string>("app_version"),
   /** Renvoie le message à afficher (« Vous avez la dernière version »…). */

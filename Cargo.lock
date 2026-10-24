@@ -3873,14 +3873,14 @@ dependencies = [
 
 [[package]]
 name = "pulse-collector"
-version = "0.2.1"
+version = "0.2.2"
 dependencies = [
  "windows 0.58.0",
 ]
 
 [[package]]
 name = "pulse-core"
-version = "0.2.1"
+version = "0.2.2"
 dependencies = [
  "chrono",
  "serde",
@@ -4876,7 +4876,7 @@ checksum = "33f4fe9184a62d842c9ef383018f3306d8ba224fd9d836f56d7288308847c256"
 
 [[package]]
 name = "skelvia-pulse"
-version = "0.2.1"
+version = "0.2.2"
 dependencies = [
  "aw-datastore",
  "aw-models",

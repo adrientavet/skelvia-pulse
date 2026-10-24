@@ -54,8 +54,9 @@ pub struct Settings {
     pub first_run_done: bool,
     /// Enregistrement en pause (gardé au redémarrage du PC).
     pub paused: bool,
-    /// Position de la pastille choisie par l'utilisateur (coin haut gauche,
-    /// en pixels de l'écran). `None` : en haut, au centre.
+    /// Position de la pastille choisie par l'utilisateur (son centre, en
+    /// pixels de l'écran ; elle est collée au bord le plus proche). `None` :
+    /// en haut, au centre.
     pub island_position: Option<[i32; 2]>,
     /// Vérifier de temps en temps s'il existe une nouvelle version. C'est
     /// la seule connexion à internet de l'application : elle télécharge un

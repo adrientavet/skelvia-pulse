@@ -234,8 +234,15 @@ pub fn show_main_window(app: AppHandle) {
 
 /// Ouvre ou referme la pastille.
 #[tauri::command]
-pub fn island_expand(app: AppHandle, expanded: bool) -> Option<crate::island::Placement> {
+pub fn island_expand(app: AppHandle, expanded: bool) -> Option<crate::island::Layout> {
     app.get_webview_window(crate::island::LABEL).map(|win| crate::island::place(&app, &win, expanded))
+}
+
+/// Forme de la pastille (bord, horizontale ou verticale), demandée par
+/// l'interface à son chargement.
+#[tauri::command]
+pub fn island_layout(app: AppHandle) -> Option<crate::island::Layout> {
+    island_expand(app, false)
 }
 
 /// Remet la pastille en haut, au centre de l'écran principal.

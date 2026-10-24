@@ -1,52 +1,70 @@
-/* La pastille : fenêtre transparente, seules la barre et le panneau sont dessinés. */
+/* La pastille : fenêtre transparente, seules la barre et le panneau sont
+   dessinés. La fenêtre laisse 4 px autour de la barre, pour son ombre.
+   --bar-left et --bar-top : place de la barre dans la fenêtre ouverte. */
 html, body { background: transparent; overflow: hidden; user-select: none; }
 
-#island {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 4px;
-}
+#island { position: relative; width: 100vw; height: 100vh; }
 
-/* La barre : toute petite, elle ne change pas au survol. */
+/* La barre : toute petite, ajustée à son contenu, elle ne change pas au survol. */
 .bar {
+  position: absolute;
+  left: calc(var(--bar-left, 0px) + 4px);
+  top: calc(var(--bar-top, 0px) + 4px);
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 8px;
-  width: 142px;
+  justify-content: center;
+  gap: 7px;
+  width: 92px;
   height: 32px;
-  padding: 0 12px 0 5px;
   border-radius: 999px;
   background: rgba(11, 11, 12, 0.94);
   border: 1px solid var(--border-strong);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
-  flex: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
 }
-.bar:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.bar:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 .bar svg { width: 24px; height: 24px; flex: none; }
 .bar .mini { font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: -0.01em; white-space: nowrap; }
-/* Nouvelle version disponible. */
-.bar .dot { margin-left: auto; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px rgba(42, 99, 245, 0.25); flex: none; }
+/* Nouvelle version disponible : un point bleu sur la mascotte. */
+.bar .dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid #0b0b0c;
+}
 
-/* Ouverte : la barre reste exactement à sa place dans la fenêtre agrandie. */
-#island.expanded .bar,
-#island.up .bar { align-self: flex-start; margin-left: calc(var(--bar-left, 0px) + 4px); }
+/* Horizontale (en haut ou en bas de l'écran). */
+#island:not(.vertical) .bar .dot { top: 2px; left: 22px; }
 
+/* Verticale (à gauche ou à droite de l'écran) : mascotte au-dessus du temps. */
+#island.vertical .bar { flex-direction: column; gap: 4px; width: 46px; height: 68px; }
+#island.vertical .bar .mini { font-size: 11px; }
+#island.vertical .bar .dot { top: 7px; right: 7px; }
+
+/* Le panneau, toujours du côté de l'intérieur de l'écran. */
 .panel {
+  position: absolute;
   width: 292px;
-  margin-top: 8px;
   padding: 14px 16px;
   border-radius: 20px;
   background: rgba(11, 11, 12, 0.96);
   border: 1px solid var(--border);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
   opacity: 0;
-  transform: translateY(-6px) scale(0.98);
+  transform: scale(0.97);
   transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
   pointer-events: none;
 }
 .expanded .panel { opacity: 1; transform: none; pointer-events: auto; }
+#island[data-edge="haut"] .panel { left: 4px; top: calc(var(--bar-top, 0px) + 44px); transform-origin: top center; }
+#island[data-edge="bas"] .panel { left: 4px; bottom: calc(100vh - var(--bar-top, 0px) + 4px); transform-origin: bottom center; }
+/* À gauche ou à droite, la hauteur du panneau (--panel-top) est calculée
+   pour qu'il soit à la hauteur de la barre, sans sortir de la fenêtre. */
+#island[data-edge="gauche"] .panel { top: var(--panel-top, 4px); left: calc(var(--bar-left, 0px) + 58px); transform-origin: left center; }
+#island[data-edge="droite"] .panel { top: var(--panel-top, 4px); right: calc(100vw - var(--bar-left, 0px) + 4px); transform-origin: right center; }
+
 .panel .head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
 .panel .total { font-family: var(--font-display); font-weight: 800; font-size: 20px; letter-spacing: -0.03em; }
 .panel .etat { font-size: 12px; font-weight: 600; color: var(--accent-text); white-space: nowrap; display: inline-flex; align-items: center; gap: 5px; }
@@ -62,8 +80,3 @@ html, body { background: transparent; overflow: hidden; user-select: none; }
 .panel .update p { font-size: 12.5px; }
 .panel .update .actions { margin-top: 8px; }
 [hidden] { display: none !important; }
-
-/* Posée en bas de l'écran : le panneau s'ouvre au-dessus de la barre. */
-#island.up { flex-direction: column-reverse; justify-content: flex-start; height: 100vh; padding-top: 0; padding-bottom: 4px; }
-#island.up .panel { margin-top: 0; margin-bottom: 8px; transform: translateY(6px) scale(0.98); }
-#island.up.expanded .panel { transform: none; }

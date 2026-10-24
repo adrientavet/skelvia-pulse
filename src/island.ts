@@ -1,11 +1,12 @@
 // La pastille : une toute petite barre (mascotte et temps du jour), toujours
-// visible, qui ne change pas au survol. Un clic l'ouvre : temps du jour,
+// visible, qui ne change pas au survol. Horizontale en haut et en bas de
+// l'écran, verticale à gauche et à droite. Un clic l'ouvre : temps du jour,
 // état, pause, mise à jour éventuelle, et un bouton pour ouvrir
 // l'application. Un autre clic, Échap ou un clic ailleurs la referme.
 // Cliquer, maintenir et glisser la barre la déplace ; lâchée, elle se colle
 // au bord de l'écran le plus proche.
 import { getCurrentWindow } from "@tauri-apps/api/window";
-import { api, dureeCourte, texteMiseAJour, type Status } from "./api";
+import { api, dureeCourte, texteMiseAJour, type IslandLayout, type Status } from "./api";
 import { h } from "./dom";
 import { creerMascotte } from "./mascot";
 
@@ -53,11 +54,16 @@ const panel = h(
 root.append(barre, panel);
 
 let status: Status | null = null;
+let vertical = false;
+
+function texteBarre(s: Status): string {
+  return s.paused ? "Pause" : dureeCourte(s.todaySecs);
+}
 
 function afficher(s: Status) {
   status = s;
   mascotte.setVeille(s.paused || s.idle);
-  mini.textContent = s.paused ? "En pause" : dureeCourte(s.todaySecs);
+  mini.textContent = texteBarre(s);
   total.textContent = `${dureeCourte(s.todaySecs)} aujourd'hui`;
   etat.textContent = s.paused ? "En pause" : s.idle ? "En veille" : "Enregistre";
   etat.className = `etat${s.paused || s.idle ? " off" : ""}`;
@@ -90,6 +96,20 @@ function afficherMiseAJour(s: Status) {
   boutonMaj.toggleAttribute("disabled", enCours);
 }
 
+// Forme donnée par l'application : bord, orientation, place de la barre.
+function appliquer(l: IslandLayout | null) {
+  if (!l) return;
+  vertical = l.edge === "gauche" || l.edge === "droite";
+  root.dataset.edge = l.edge;
+  root.classList.toggle("vertical", vertical);
+  root.style.setProperty("--bar-left", `${l.barLeft}px`);
+  root.style.setProperty("--bar-top", `${l.barTop}px`);
+  // Barre verticale : panneau centré sur elle, sans sortir de la fenêtre.
+  const milieu = l.barTop + 4 + 34;
+  const haut = Math.min(Math.max(milieu - panel.offsetHeight / 2, 4), window.innerHeight - panel.offsetHeight - 4);
+  root.style.setProperty("--panel-top", `${Math.max(haut, 4)}px`);
+}
+
 // Ouvrir et refermer.
 let ouverte = false;
 let retrecir: number | undefined;
@@ -100,10 +120,9 @@ async function ouvrir() {
   ouverte = true;
   window.clearTimeout(retrecir);
   barre.setAttribute("aria-expanded", "true");
-  const p = await api.islandExpand(true);
+  const l = await api.islandExpand(true);
   if (!ouverte) return;
-  root.classList.toggle("up", p?.up ?? false);
-  root.style.setProperty("--bar-left", `${p?.barLeft ?? 0}px`);
+  appliquer(l);
   root.classList.add("expanded");
 }
 
@@ -114,11 +133,7 @@ function fermer() {
   barre.setAttribute("aria-expanded", "false");
   root.classList.remove("expanded");
   // On attend la fin de l'animation avant de rétrécir la fenêtre.
-  retrecir = window.setTimeout(() => {
-    root.classList.remove("up");
-    root.style.removeProperty("--bar-left");
-    api.islandExpand(false);
-  }, 220);
+  retrecir = window.setTimeout(() => api.islandExpand(false).then(appliquer), 220);
 }
 
 // Un clic sur la barre l'ouvre ou la referme. Cliquer, maintenir et glisser
@@ -144,21 +159,6 @@ window.addEventListener("mousemove", (e) => {
     glisser();
   }
 });
-
-// Ouverte, elle se referme d'abord : on ne déplace que la petite barre.
-// Une fois lâchée, l'application la colle au bord de l'écran le plus proche.
-async function glisser() {
-  if (ouverte) {
-    ouverte = false;
-    window.clearTimeout(retrecir);
-    window.clearTimeout(quitter);
-    barre.setAttribute("aria-expanded", "false");
-    root.classList.remove("expanded", "up");
-    root.style.removeProperty("--bar-left");
-    await api.islandExpand(false);
-  }
-  getCurrentWindow().startDragging();
-}
 window.addEventListener("mouseup", (e) => {
   if (!appui || e.button !== 0) return;
   appui = null;
@@ -172,6 +172,20 @@ barre.addEventListener("keydown", (e) => {
     else ouvrir();
   }
 });
+
+// Ouverte, elle se referme d'abord : on ne déplace que la petite barre.
+// Une fois lâchée, l'application la colle au bord de l'écran le plus proche.
+async function glisser() {
+  if (ouverte) {
+    ouverte = false;
+    window.clearTimeout(retrecir);
+    window.clearTimeout(quitter);
+    barre.setAttribute("aria-expanded", "false");
+    root.classList.remove("expanded");
+    appliquer(await api.islandExpand(false));
+  }
+  getCurrentWindow().startDragging();
+}
 
 // Elle se referme d'elle-même : Échap, clic dans une autre fenêtre, ou
 // souris partie depuis quelques secondes.
@@ -197,5 +211,7 @@ boutonMaj.addEventListener("click", () => {
   api.installUpdate().catch(() => {});
 });
 
+api.onIslandLayout(appliquer);
+api.islandLayout().then(appliquer);
 api.status().then(afficher);
 api.onStatus(afficher);

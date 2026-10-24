@@ -2,6 +2,11 @@
 
 Les nouveautés de chaque version, de la plus récente à la plus ancienne. Le texte de la version publiée est repris sur la page de téléchargement.
 
+## 0.2.2
+
+- Barre plus compacte et centrée, sans espace vide.
+- Collée à gauche ou à droite de l'écran, la barre passe à la verticale (mascotte au-dessus du temps), et son panneau s'ouvre sur le côté.
+
 ## 0.2.1
 
 - La pastille devient une toute petite barre, qui ne s'ouvre plus quand la souris passe dessus. Un clic l'ouvre (temps du jour, pause, bouton pour ouvrir l'application).

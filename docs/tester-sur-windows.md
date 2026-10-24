@@ -46,6 +46,7 @@ Cochez au fur et à mesure et notez ce qui ne va pas.
 - [ ] Le bouton Pause passe à « Reprendre » (mascotte en veille, « En pause » dans la barre), et plus rien n'est compté.
 - [ ] Cliquer, maintenir et glisser la barre la déplace, y compris sur un autre écran, sans l'ouvrir.
 - [ ] Lâchée, elle se colle au bord le plus proche : en haut, en bas (au-dessus de la barre des tâches, pas dessous), à gauche, à droite, et reste à l'endroit choisi le long de ce bord.
+- [ ] À gauche et à droite, elle devient verticale ; ouverte, son panneau s'affiche à côté, à sa hauteur. En haut et en bas, elle est horizontale, sans espace vide.
 - [ ] Ouverte près du bas de l'écran, elle se déploie vers le haut, sans sortir de l'écran. Contre le bord gauche ou droit, le panneau reste sur l'écran.
 - [ ] Elle reste au-dessus des autres fenêtres sans gêner (vérifier avec une fenêtre en plein écran, et sur un écran avec mise à l'échelle 125 % ou 150 %).
 - [ ] Après avoir quitté puis relancé SKELVIA Pulse, elle revient à sa place.

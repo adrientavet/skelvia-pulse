@@ -105,6 +105,7 @@ pub fn run() {
             commands::open_audit_page,
             commands::show_main_window,
             commands::island_expand,
+            commands::island_layout,
             commands::reset_island,
             commands::app_version,
             commands::check_updates_now,
