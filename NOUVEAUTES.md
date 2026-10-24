@@ -2,6 +2,11 @@
 
 Les nouveautés de chaque version, de la plus récente à la plus ancienne. Le texte de la version publiée est repris sur la page de téléchargement.
 
+## 0.2.1
+
+- La pastille devient une toute petite barre, qui ne s'ouvre plus quand la souris passe dessus. Un clic l'ouvre (temps du jour, pause, bouton pour ouvrir l'application).
+- Déplacez-la en cliquant, maintenant et glissant : lâchée, elle se colle au bord de l'écran le plus proche (haut, bas, gauche ou droite).
+
 ## 0.2.0
 
 - Mises à jour en un clic : quand une nouvelle version existe, la pastille affiche « mise à jour ». Un clic l'installe, SKELVIA Pulse se relance, et vos mesures sont gardées. La vérification peut être coupée dans Réglages.

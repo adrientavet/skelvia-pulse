@@ -68,8 +68,8 @@ export const api = {
   openDataFolder: () => invoke<void>("open_data_folder"),
   openAuditPage: () => invoke<void>("open_audit_page"),
   showMain: () => invoke<void>("show_main_window"),
-  /** Renvoie vrai si la pastille s'ouvre vers le haut (posée en bas de l'écran). */
-  islandExpand: (expanded: boolean) => invoke<boolean>("island_expand", { expanded }),
+  /** Ouvre ou referme la pastille ; dit où se trouve la barre dans la fenêtre. */
+  islandExpand: (expanded: boolean) => invoke<{ up: boolean; barLeft: number } | null>("island_expand", { expanded }),
   resetIsland: () => invoke<void>("reset_island"),
   version: () => invoke<string>("app_version"),
   /** Renvoie le message à afficher (« Vous avez la dernière version »…). */

@@ -232,13 +232,10 @@ pub fn show_main_window(app: AppHandle) {
     crate::show_main(&app);
 }
 
-/// Agrandit ou rétrécit la pastille. Renvoie vrai si elle s'ouvre vers le haut.
+/// Ouvre ou referme la pastille.
 #[tauri::command]
-pub fn island_expand(app: AppHandle, expanded: bool) -> bool {
-    match app.get_webview_window(crate::island::LABEL) {
-        Some(win) => crate::island::place(&app, &win, expanded),
-        None => false,
-    }
+pub fn island_expand(app: AppHandle, expanded: bool) -> Option<crate::island::Placement> {
+    app.get_webview_window(crate::island::LABEL).map(|win| crate::island::place(&app, &win, expanded))
 }
 
 /// Remet la pastille en haut, au centre de l'écran principal.

@@ -10,7 +10,7 @@ use windows::Win32::System::SystemInformation::GetTickCount64;
 use windows::Win32::System::Threading::{
     OpenProcess, QueryFullProcessImageNameW, PROCESS_NAME_WIN32, PROCESS_QUERY_LIMITED_INFORMATION,
 };
-use windows::Win32::UI::Input::KeyboardAndMouse::{GetLastInputInfo, LASTINPUTINFO};
+use windows::Win32::UI::Input::KeyboardAndMouse::{GetAsyncKeyState, GetLastInputInfo, LASTINPUTINFO, VK_LBUTTON, VK_RBUTTON};
 use windows::Win32::UI::WindowsAndMessaging::{
     EnumChildWindows, GetForegroundWindow, GetWindowTextLengthW, GetWindowTextW,
     GetWindowThreadProcessId,
@@ -118,4 +118,13 @@ pub fn is_session_locked() -> bool {
             Err(_) => true,
         }
     }
+}
+
+/// Un bouton de la souris est-il enfoncé en ce moment ? Appelé seulement
+/// pendant que l'on fait glisser la pastille, pour savoir quand on la lâche.
+/// Les deux boutons sont regardés : Windows renvoie l'état des boutons
+/// physiques, inversés pour les gauchers qui l'ont réglé ainsi.
+pub fn mouse_button_down() -> bool {
+    // Bit de poids fort : bouton enfoncé au moment de l'appel.
+    unsafe { GetAsyncKeyState(VK_LBUTTON.0 as i32) < 0 || GetAsyncKeyState(VK_RBUTTON.0 as i32) < 0 }
 }

@@ -4,7 +4,10 @@
 //! - le temps écoulé depuis la dernière action de la souris ou du clavier
 //!   (un nombre de secondes : ni les touches, ni les clics, ni la position
 //!   de la souris ne sont lus) ;
-//! - si la session Windows est verrouillée.
+//! - si la session Windows est verrouillée ;
+//! - seulement pendant que l'on fait glisser la pastille : si un bouton de la
+//!   souris est encore enfoncé, pour savoir quand on la lâche (rien n'est
+//!   enregistré).
 //!
 //! Pas de capture d'écran, pas d'écoute du clavier, pas de lecture du
 //! contenu des fenêtres.
@@ -21,7 +24,7 @@ pub struct Foreground {
 #[cfg(windows)]
 mod windows_impl;
 #[cfg(windows)]
-pub use windows_impl::{foreground, is_session_locked, seconds_since_last_input};
+pub use windows_impl::{foreground, is_session_locked, mouse_button_down, seconds_since_last_input};
 
 // Hors Windows (développement sous Linux ou macOS) : rien n'est lu. Les
 // fonctions existent pour que le reste de l'application se compile et se
@@ -38,5 +41,10 @@ pub fn seconds_since_last_input() -> Option<f64> {
 
 #[cfg(not(windows))]
 pub fn is_session_locked() -> bool {
+    false
+}
+
+#[cfg(not(windows))]
+pub fn mouse_button_down() -> bool {
     false
 }

@@ -40,14 +40,17 @@ Cochez au fur et à mesure et notez ce qui ne va pas.
 - [ ] Une application lancée « en tant qu'administrateur » : son nom apparaît-il ? (cas connu comme délicat)
 
 ### Pastille
-- [ ] Au survol, elle s'agrandit et montre le temps du jour et « Ouvrir le détail ».
-- [ ] Le bouton Pause passe à « En pause » (mascotte en veille), et plus rien n'est compté.
+- [ ] C'est une toute petite barre (mascotte et temps du jour). Passer la souris dessus ne change rien.
+- [ ] Un clic l'ouvre : temps du jour, état, Pause, « Ouvrir l'application ». Un autre clic, Échap, ou un clic dans une autre fenêtre la referme.
+- [ ] « Ouvrir l'application » ouvre la fenêtre principale.
+- [ ] Le bouton Pause passe à « Reprendre » (mascotte en veille, « En pause » dans la barre), et plus rien n'est compté.
+- [ ] Cliquer, maintenir et glisser la barre la déplace, y compris sur un autre écran, sans l'ouvrir.
+- [ ] Lâchée, elle se colle au bord le plus proche : en haut, en bas (au-dessus de la barre des tâches, pas dessous), à gauche, à droite, et reste à l'endroit choisi le long de ce bord.
+- [ ] Ouverte près du bas de l'écran, elle se déploie vers le haut, sans sortir de l'écran. Contre le bord gauche ou droit, le panneau reste sur l'écran.
 - [ ] Elle reste au-dessus des autres fenêtres sans gêner (vérifier avec une fenêtre en plein écran, et sur un écran avec mise à l'échelle 125 % ou 150 %).
-- [ ] Avec deux écrans : au départ, elle se place sur l'écran principal.
-- [ ] Glisser la pastille (en la tenant par la mascotte ou le texte, pas par le bouton) la déplace n'importe où, y compris sur un autre écran.
-- [ ] Après avoir quitté puis relancé SKELVIA Pulse, elle revient à la position choisie.
-- [ ] Posée en bas de l'écran, elle s'ouvre vers le haut au survol, sans sortir de l'écran.
+- [ ] Après avoir quitté puis relancé SKELVIA Pulse, elle revient à sa place.
 - [ ] « Remettre la pastille en haut de l'écran » (Réglages, ou menu de l'icône) la ramène en haut au centre.
+- [ ] Pour un gaucher qui a inversé les boutons de la souris : le collage au bord se fait bien au relâchement.
 
 ### Mises à jour
 Ces vérifications demandent deux versions publiées (par exemple 0.2.0 installée, puis 0.2.1 publiée).

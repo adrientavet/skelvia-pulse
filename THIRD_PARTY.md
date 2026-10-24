@@ -13,7 +13,7 @@ SKELVIA Pulse s'appuie sur des logiciels libres. Merci à leurs auteurs.
 
 ## Coucou (MIT)
 
-Le principe d'interface de la pastille (une petite « île » en haut de l'écran qui s'agrandit au survol, des « pills » pour les états) s'inspire de [Coucou](https://github.com/louis-cfm/coucou) de Louis Raillé. **Aucun code, aucun nom, aucune image, aucun son et aucun média de Coucou n'est repris.** Les noms « Coucou » et « Mochi », le personnage, l'icône, les sons et les médias de Coucou appartiennent à Louis Raillé (voir son fichier `LICENSE-ASSETS.md`).
+Le principe d'interface de la pastille (une petite « île » en haut de l'écran, des « pills » pour les états) s'inspire de [Coucou](https://github.com/louis-cfm/coucou) de Louis Raillé. **Aucun code, aucun nom, aucune image, aucun son et aucun média de Coucou n'est repris.** Les noms « Coucou » et « Mochi », le personnage, l'icône, les sons et les médias de Coucou appartiennent à Louis Raillé (voir son fichier `LICENSE-ASSETS.md`).
 
 Si du code de Coucou est repris un jour, il faudra conserver sa mention de copyright MIT (« Copyright (c) 2026 Louis Raillé ») et la reproduire ici.
 

@@ -1,4 +1,4 @@
-/* La pastille : fenêtre transparente, seule la pilule est dessinée. */
+/* La pastille : fenêtre transparente, seules la barre et le panneau sont dessinés. */
 html, body { background: transparent; overflow: hidden; user-select: none; }
 
 #island {
@@ -8,28 +8,33 @@ html, body { background: transparent; overflow: hidden; user-select: none; }
   padding-top: 4px;
 }
 
-.pill {
-  cursor: grab;
+/* La barre : toute petite, elle ne change pas au survol. */
+.bar {
+  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 10px;
-  height: 44px;
-  padding: 0 6px 0 7px;
+  gap: 8px;
+  width: 142px;
+  height: 32px;
+  padding: 0 12px 0 5px;
   border-radius: 999px;
   background: rgba(11, 11, 12, 0.94);
   border: 1px solid var(--border-strong);
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  flex: none;
 }
-.pill svg { width: 30px; height: 30px; flex: none; }
-.pill .state { display: flex; flex-direction: column; line-height: 1.15; min-width: 86px; }
-.pill .state b { font-family: var(--font-display); font-weight: 700; font-size: 14px; letter-spacing: -0.01em; }
-.pill .state span { font-size: 12px; color: var(--faint); }
-.pill:active { cursor: grabbing; }
-.pill button { cursor: pointer; padding: 6px 12px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
-.pill button svg { width: 12px; height: 12px; }
+.bar:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.bar svg { width: 24px; height: 24px; flex: none; }
+.bar .mini { font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: -0.01em; white-space: nowrap; }
+/* Nouvelle version disponible. */
+.bar .dot { margin-left: auto; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px rgba(42, 99, 245, 0.25); flex: none; }
+
+/* Ouverte : la barre reste exactement à sa place dans la fenêtre agrandie. */
+#island.expanded .bar,
+#island.up .bar { align-self: flex-start; margin-left: calc(var(--bar-left, 0px) + 4px); }
 
 .panel {
-  width: 316px;
+  width: 292px;
   margin-top: 8px;
   padding: 14px 16px;
   border-radius: 20px;
@@ -38,38 +43,27 @@ html, body { background: transparent; overflow: hidden; user-select: none; }
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   opacity: 0;
   transform: translateY(-6px) scale(0.98);
-  transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+  transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
   pointer-events: none;
 }
 .expanded .panel { opacity: 1; transform: none; pointer-events: auto; }
-.panel .total { font-family: var(--font-display); font-weight: 800; font-size: 22px; letter-spacing: -0.03em; }
-.panel p { font-size: 13px; color: var(--muted); margin-top: 2px; }
-.panel .actions { display: flex; gap: 8px; margin-top: 10px; }
-.panel .actions button { padding: 6px 14px; font-size: 13px; }
-
-.panel .hint { font-size: 12px; color: var(--faint); margin-top: 10px; }
-
-/* Nouvelle version disponible. */
-.pill .state button.maj {
-  all: unset;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--accent-text);
-}
-.pill .state button.maj::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px rgba(42, 99, 245, 0.25); }
-.pill .state button.maj:hover { text-decoration: underline; }
-.pill .state button.maj:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
-.pill .state button.maj[disabled] { cursor: default; text-decoration: none; }
+.panel .head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.panel .total { font-family: var(--font-display); font-weight: 800; font-size: 20px; letter-spacing: -0.03em; }
+.panel .etat { font-size: 12px; font-weight: 600; color: var(--accent-text); white-space: nowrap; display: inline-flex; align-items: center; gap: 5px; }
+.panel .etat::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+.panel .etat.off { color: var(--faint); }
+.panel .etat.off::before { background: #8b9bb4; }
+.panel p { font-size: 13px; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+.panel .actions { display: flex; gap: 8px; margin-top: 12px; }
+.panel .actions button { padding: 6px 12px; font-size: 13px; white-space: nowrap; display: flex; align-items: center; gap: 6px; }
+.panel .actions button svg { width: 12px; height: 12px; }
 .panel .update { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
 .panel .update b { font-family: var(--font-display); font-weight: 700; font-size: 14px; }
-.panel .update p { font-size: 12.5px; line-height: 1.4; }
+.panel .update p { font-size: 12.5px; }
+.panel .update .actions { margin-top: 8px; }
 [hidden] { display: none !important; }
 
-/* Posée en bas de l'écran : le panneau s'ouvre au-dessus de la pilule. */
+/* Posée en bas de l'écran : le panneau s'ouvre au-dessus de la barre. */
 #island.up { flex-direction: column-reverse; justify-content: flex-start; height: 100vh; padding-top: 0; padding-bottom: 4px; }
 #island.up .panel { margin-top: 0; margin-bottom: 8px; transform: translateY(6px) scale(0.98); }
 #island.up.expanded .panel { transform: none; }

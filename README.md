@@ -56,7 +56,7 @@ Le titre d'une fenêtre peut contenir des informations sensibles (le sujet d'un 
 ## Ce qui n'est jamais enregistré
 
 - Aucune capture d'écran.
-- Aucune touche tapée, aucun texte saisi, aucun clic, aucun mouvement de souris. Windows indique seulement l'heure de la dernière action : c'est ce qui permet de savoir si vous êtes actif.
+- Aucune touche tapée, aucun texte saisi, aucun clic, aucun mouvement de souris. Windows indique seulement l'heure de la dernière action : c'est ce qui permet de savoir si vous êtes actif. Pendant que vous faites glisser la pastille, et seulement à ce moment-là, l'application regarde si le bouton de la souris est encore enfoncé, pour savoir quand vous la lâchez : rien n'est enregistré.
 - Aucun contenu de vos mails, documents ou pages web.
 - Les fenêtres ouvertes en arrière-plan : seule celle que vous utilisez compte.
 - La navigation privée : non comptée, et ce que l'extension en envoie est effacé.
@@ -71,7 +71,7 @@ Le titre d'une fenêtre peut contenir des informations sensibles (le sujet d'un 
 
 ## Les écrans
 
-1. **La pastille** : mascotte, état, bouton Pause. Au survol, elle montre le temps compté aujourd'hui. Elle apparaît en haut au centre de l'écran ; **faites-la glisser à la souris pour la placer où vous voulez**, elle garde sa place même après un redémarrage. Pour la remettre en haut : Réglages, ou le menu de l'icône près de l'horloge.
+1. **La pastille** : une toute petite barre (mascotte et temps du jour), qui ne change pas quand la souris passe dessus. **Un clic l'ouvre** : temps du jour, état, bouton Pause et bouton « Ouvrir l'application » ; un autre clic, Échap ou un clic ailleurs la referme. Elle apparaît en haut au centre de l'écran. **Cliquez, maintenez et glissez pour la déplacer** : lâchée, elle se colle au bord de l'écran le plus proche (haut, bas, gauche ou droite) et garde sa place, même après un redémarrage. Pour la remettre en haut : Réglages, ou le menu de l'icône près de l'horloge.
 2. **Aujourd'hui** : temps par type de tâche, par application, par site, et jour par jour sur 7 ou 30 jours.
 3. **Rapport** : bouton « Télécharger mon rapport ». Un fichier HTML d'une page, lisible sans internet, est écrit dans votre dossier Téléchargements. Par défaut, il ne contient pas le nom de vos documents (ils peuvent contenir des noms de clients) : c'est une case à cocher.
 4. **Réglages** : délai d'inactivité, titres, exclusions, règles de regroupement, extension navigateur, effacement des données.

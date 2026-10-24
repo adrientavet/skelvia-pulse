@@ -248,7 +248,7 @@ export async function vueReglages(root: HTMLElement, status: Status) {
         "div",
         { class: "field" },
         h("b", {}, "Pastille"),
-        h("span", { class: "faint" }, "Faites-la glisser à la souris pour la placer où vous voulez sur l'écran : elle garde sa place, même après un redémarrage."),
+        h("span", { class: "faint" }, "Un clic sur la pastille l'ouvre : temps du jour, pause, et un bouton pour ouvrir cette fenêtre. Pour la déplacer : cliquez, maintenez et glissez-la. Lâchée, elle se colle au bord de l'écran le plus proche (haut, bas, gauche ou droite) et garde sa place, même après un redémarrage."),
         h("div", {}, h("button", { type: "button", onclick: async () => { await api.resetIsland(); dire("La pastille est revenue en haut de l'écran."); } }, "Remettre la pastille en haut de l'écran")),
       ),
       h(
