@@ -9,6 +9,7 @@ html, body { background: transparent; overflow: hidden; user-select: none; }
 }
 
 .pill {
+  cursor: grab;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -23,7 +24,8 @@ html, body { background: transparent; overflow: hidden; user-select: none; }
 .pill .state { display: flex; flex-direction: column; line-height: 1.15; min-width: 86px; }
 .pill .state b { font-family: var(--font-display); font-weight: 700; font-size: 14px; letter-spacing: -0.01em; }
 .pill .state span { font-size: 12px; color: var(--faint); }
-.pill button { padding: 6px 12px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+.pill:active { cursor: grabbing; }
+.pill button { cursor: pointer; padding: 6px 12px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
 .pill button svg { width: 12px; height: 12px; }
 
 .panel {
@@ -44,3 +46,10 @@ html, body { background: transparent; overflow: hidden; user-select: none; }
 .panel p { font-size: 13px; color: var(--muted); margin-top: 2px; }
 .panel .actions { display: flex; gap: 8px; margin-top: 10px; }
 .panel .actions button { padding: 6px 14px; font-size: 13px; }
+
+.panel .hint { font-size: 12px; color: var(--faint); margin-top: 10px; }
+
+/* Posée en bas de l'écran : le panneau s'ouvre au-dessus de la pilule. */
+#island.up { flex-direction: column-reverse; justify-content: flex-start; height: 100vh; padding-top: 0; padding-bottom: 4px; }
+#island.up .panel { margin-top: 0; margin-bottom: 8px; transform: translateY(6px) scale(0.98); }
+#island.up.expanded .panel { transform: none; }

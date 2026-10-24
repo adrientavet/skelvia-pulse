@@ -24,9 +24,10 @@ pub struct TrayItems {
 pub fn create(app: &AppHandle) -> tauri::Result<()> {
     let open = MenuItem::with_id(app, "open", "Ouvrir SKELVIA Pulse", true, None::<&str>)?;
     let pause = MenuItem::with_id(app, "pause", "Mettre en pause", true, None::<&str>)?;
+    let island = MenuItem::with_id(app, "island", "Remettre la pastille en haut de l'écran", true, None::<&str>)?;
     let quit = MenuItem::with_id(app, "quit", "Quitter (l'enregistrement s'arrête)", true, None::<&str>)?;
     let sep = PredefinedMenuItem::separator(app)?;
-    let menu = Menu::with_items(app, &[&open, &pause, &sep, &quit])?;
+    let menu = Menu::with_items(app, &[&open, &pause, &island, &sep, &quit])?;
 
     TrayIconBuilder::with_id(TRAY_ID)
         .icon(Image::from_bytes(ICON_ACTIVE)?)
@@ -36,6 +37,7 @@ pub fn create(app: &AppHandle) -> tauri::Result<()> {
         .on_menu_event(|app, event| match event.id.as_ref() {
             "open" => crate::show_main(app),
             "pause" => crate::commands::toggle_pause(app),
+            "island" => crate::island::reset(app),
             "quit" => app.exit(0),
             _ => {}
         })

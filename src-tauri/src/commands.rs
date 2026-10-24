@@ -87,6 +87,7 @@ pub fn save_settings(state: St, settings: Settings) -> Settings {
     // Ces deux valeurs ne se changent pas depuis l'écran des réglages.
     new.paused = old.paused;
     new.first_run_done = old.first_run_done;
+    new.island_position = old.island_position;
     let saved = state.save_settings(new);
     if saved.exclusions != old.exclusions {
         let store = state.store.clone();
@@ -187,7 +188,7 @@ pub fn complete_first_run(app: AppHandle, autostart: bool) {
     state.save_settings(s);
     let _ = set_autostart_inner(&app, autostart);
     if let Some(island) = app.get_webview_window(crate::island::LABEL) {
-        crate::island::place(&island, false);
+        crate::island::place(&app, &island, false);
         let _ = island.show();
     }
     let _ = app.emit("pulse://status", &state.status());
@@ -231,9 +232,17 @@ pub fn show_main_window(app: AppHandle) {
     crate::show_main(&app);
 }
 
+/// Agrandit ou rétrécit la pastille. Renvoie vrai si elle s'ouvre vers le haut.
 #[tauri::command]
-pub fn island_expand(app: AppHandle, expanded: bool) {
-    if let Some(win) = app.get_webview_window(crate::island::LABEL) {
-        crate::island::place(&win, expanded);
+pub fn island_expand(app: AppHandle, expanded: bool) -> bool {
+    match app.get_webview_window(crate::island::LABEL) {
+        Some(win) => crate::island::place(&app, &win, expanded),
+        None => false,
     }
+}
+
+/// Remet la pastille en haut, au centre de l'écran principal.
+#[tauri::command]
+pub fn reset_island(app: AppHandle) {
+    crate::island::reset(&app);
 }

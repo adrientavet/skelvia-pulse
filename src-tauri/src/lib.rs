@@ -82,6 +82,7 @@ pub fn run() {
         ))
         .plugin(tauri_plugin_opener::init())
         .manage(state)
+        .manage(island::Island::default())
         .invoke_handler(tauri::generate_handler![
             commands::get_status,
             commands::set_paused,
@@ -99,11 +100,12 @@ pub fn run() {
             commands::open_audit_page,
             commands::show_main_window,
             commands::island_expand,
+            commands::reset_island,
         ])
         .setup(move |app| {
             tray::create(app.handle())?;
             if let Some(island) = app.get_webview_window(island::LABEL) {
-                island::place(&island, false);
+                island::place(app.handle(), &island, false);
                 if first_run_done {
                     let _ = island.show();
                 } else {
@@ -118,6 +120,12 @@ pub fn run() {
             Ok(())
         })
         .on_window_event(|window, event| {
+            // La pastille a été déplacée (glissée par l'utilisateur).
+            if window.label() == island::LABEL {
+                if let WindowEvent::Moved(pos) = event {
+                    island::on_moved(window.app_handle(), *pos);
+                }
+            }
             // Fermer la fenêtre principale la cache seulement : l'enregistrement
             // continue, la pastille et l'icône restent visibles.
             if window.label() == "main" {

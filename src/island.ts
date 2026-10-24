@@ -1,5 +1,6 @@
 // La pastille en haut de l'écran : mascotte, état, bouton pause. Toujours
 // visible. Au survol, elle s'agrandit et montre le temps compté aujourd'hui.
+import { getCurrentWindow } from "@tauri-apps/api/window";
 import { api, dureeCourte, type Status } from "./api";
 import { h } from "./dom";
 import { creerMascotte } from "./mascot";
@@ -21,9 +22,19 @@ const panel = h(
   total,
   explication,
   h("div", { class: "actions" }, h("button", { type: "button", class: "primary", onclick: () => api.showMain() }, "Ouvrir le détail")),
+  h("p", { class: "hint" }, "Glissez la pastille pour la placer où vous voulez."),
 );
 
-root.append(h("div", { class: "pill" }, mascotte.svg, h("div", { class: "state" }, etat, sousEtat), bouton), panel);
+const pilule = h("div", { class: "pill", title: "Glissez pour déplacer la pastille" }, mascotte.svg, h("div", { class: "state" }, etat, sousEtat), bouton);
+root.append(pilule, panel);
+
+// Glisser la pilule (ailleurs que sur un bouton) déplace la pastille. La
+// position est gardée par l'application, même après un redémarrage.
+pilule.addEventListener("mousedown", (e) => {
+  if (e.button !== 0 || (e.target as HTMLElement).closest("button")) return;
+  e.preventDefault();
+  getCurrentWindow().startDragging();
+});
 
 let status: Status | null = null;
 
@@ -62,15 +73,19 @@ document.body.addEventListener("mouseenter", () => {
   window.clearTimeout(fermeture);
   window.clearTimeout(retrecir);
   if (!root.classList.contains("expanded")) {
-    api.islandExpand(true);
     root.classList.add("expanded");
+    // Posée en bas de l'écran, elle s'ouvre vers le haut.
+    api.islandExpand(true).then((versLeHaut) => root.classList.toggle("up", versLeHaut));
   }
 });
 document.body.addEventListener("mouseleave", () => {
   window.clearTimeout(fermeture);
   fermeture = window.setTimeout(() => {
     root.classList.remove("expanded");
-    retrecir = window.setTimeout(() => api.islandExpand(false), 300);
+    retrecir = window.setTimeout(() => {
+      api.islandExpand(false);
+      root.classList.remove("up");
+    }, 300);
   }, 350);
 });
 

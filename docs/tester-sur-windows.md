@@ -40,7 +40,11 @@ Cochez au fur et à mesure et notez ce qui ne va pas.
 - [ ] Au survol, elle s'agrandit et montre le temps du jour et « Ouvrir le détail ».
 - [ ] Le bouton Pause passe à « En pause » (mascotte en veille), et plus rien n'est compté.
 - [ ] Elle reste au-dessus des autres fenêtres sans gêner (vérifier avec une fenêtre en plein écran, et sur un écran avec mise à l'échelle 125 % ou 150 %).
-- [ ] Avec deux écrans : elle se place sur l'écran principal.
+- [ ] Avec deux écrans : au départ, elle se place sur l'écran principal.
+- [ ] Glisser la pastille (en la tenant par la mascotte ou le texte, pas par le bouton) la déplace n'importe où, y compris sur un autre écran.
+- [ ] Après avoir quitté puis relancé SKELVIA Pulse, elle revient à la position choisie.
+- [ ] Posée en bas de l'écran, elle s'ouvre vers le haut au survol, sans sortir de l'écran.
+- [ ] « Remettre la pastille en haut de l'écran » (Réglages, ou menu de l'icône) la ramène en haut au centre.
 
 ### Navigateur
 - [ ] Installez l'extension via les boutons « Pour Chrome », « Pour Edge » ou « Pour Firefox ». Noter les étapes réelles (surtout pour Edge).

@@ -14,7 +14,7 @@ Il est proposé par [SKELVIA](https://skelvia.fr), qui installe des assistants I
 
 - **Tout reste sur votre PC.** Pas de compte, pas de serveur SKELVIA, aucune télémétrie. Le rapport est un fichier que vous gardez, imprimez ou transmettez, comme vous voulez.
 - **Pas d'espionnage.** Pas de capture d'écran, pas de touches tapées, pas de contenu de mails ou de documents.
-- **Toujours visible.** Une pastille en haut de l'écran montre l'état (« Enregistre » ou « En pause ») avec un bouton Pause. Une icône reste près de l'horloge de Windows.
+- **Toujours visible.** Une pastille, que vous placez où vous voulez sur l'écran, montre l'état (« Enregistre » ou « En pause ») avec un bouton Pause. Une icône reste près de l'horloge de Windows.
 - **Aucun réglage obligatoire.** On installe, on lit l'écran d'accueil, c'est parti.
 
 ## Installer
@@ -71,7 +71,7 @@ Le titre d'une fenêtre peut contenir des informations sensibles (le sujet d'un 
 
 ## Les écrans
 
-1. **La pastille** en haut de l'écran : mascotte, état, bouton Pause. Au survol, elle montre le temps compté aujourd'hui.
+1. **La pastille** : mascotte, état, bouton Pause. Au survol, elle montre le temps compté aujourd'hui. Elle apparaît en haut au centre de l'écran ; **faites-la glisser à la souris pour la placer où vous voulez**, elle garde sa place même après un redémarrage. Pour la remettre en haut : Réglages, ou le menu de l'icône près de l'horloge.
 2. **Aujourd'hui** : temps par type de tâche, par application, par site, et jour par jour sur 7 ou 30 jours.
 3. **Rapport** : bouton « Télécharger mon rapport ». Un fichier HTML d'une page, lisible sans internet, est écrit dans votre dossier Téléchargements. Par défaut, il ne contient pas le nom de vos documents (ils peuvent contenir des noms de clients) : c'est une case à cocher.
 4. **Réglages** : délai d'inactivité, titres, exclusions, règles de regroupement, extension navigateur, effacement des données.

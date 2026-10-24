@@ -12,6 +12,7 @@ export interface Settings {
   rules: Rule[];
   first_run_done: boolean;
   paused: boolean;
+  island_position: [number, number] | null;
 }
 
 export interface Status {
@@ -55,7 +56,9 @@ export const api = {
   openDataFolder: () => invoke<void>("open_data_folder"),
   openAuditPage: () => invoke<void>("open_audit_page"),
   showMain: () => invoke<void>("show_main_window"),
-  islandExpand: (expanded: boolean) => invoke<void>("island_expand", { expanded }),
+  /** Renvoie vrai si la pastille s'ouvre vers le haut (posée en bas de l'écran). */
+  islandExpand: (expanded: boolean) => invoke<boolean>("island_expand", { expanded }),
+  resetIsland: () => invoke<void>("reset_island"),
   onStatus: (cb: (s: Status) => void): Promise<UnlistenFn> => listen<Status>("pulse://status", (e) => cb(e.payload)),
 };
 

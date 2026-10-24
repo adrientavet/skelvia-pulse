@@ -225,6 +225,13 @@ export async function vueReglages(root: HTMLElement, status: Status) {
         h("span", {}, h("b", {}, "Enregistrer le titre des fenêtres"), h("br"), h("span", { class: "faint" }, "Le titre indique le document ou la page (par exemple « Devis Martin.xlsx »). Il peut contenir le nom d'un client ou le sujet d'un mail. Sans titre, le regroupement ne se fait que sur les applications et les sites.")),
       ),
       h(
+        "div",
+        { class: "field" },
+        h("b", {}, "Pastille"),
+        h("span", { class: "faint" }, "Faites-la glisser à la souris pour la placer où vous voulez sur l'écran : elle garde sa place, même après un redémarrage."),
+        h("div", {}, h("button", { type: "button", onclick: async () => { await api.resetIsland(); dire("La pastille est revenue en haut de l'écran."); } }, "Remettre la pastille en haut de l'écran")),
+      ),
+      h(
         "label",
         { class: "check field", for: "demarrage" },
         demarrage,

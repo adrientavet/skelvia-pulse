@@ -1,7 +1,7 @@
 {
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "default",
-  "description": "Droits des deux fenêtres : écouter les événements de l'application. Les actions passent par les commandes de l'application.",
+  "description": "Droits des deux fenêtres : écouter les événements de l'application. Les actions passent par les commandes de l'application. La pastille peut être déplacée à la souris.",
   "windows": ["main", "island"],
-  "permissions": ["core:default"]
+  "permissions": ["core:default", "core:window:allow-start-dragging"]
 }

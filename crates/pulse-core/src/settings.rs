@@ -54,6 +54,9 @@ pub struct Settings {
     pub first_run_done: bool,
     /// Enregistrement en pause (gardé au redémarrage du PC).
     pub paused: bool,
+    /// Position de la pastille choisie par l'utilisateur (coin haut gauche,
+    /// en pixels de l'écran). `None` : en haut, au centre.
+    pub island_position: Option<[i32; 2]>,
 }
 
 impl Default for Settings {
@@ -65,6 +68,7 @@ impl Default for Settings {
             rules: rules::default_rules(),
             first_run_done: false,
             paused: false,
+            island_position: None,
         }
     }
 }
