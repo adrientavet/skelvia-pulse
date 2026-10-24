@@ -1,7 +1,8 @@
-# Publication d'une version : déclenchée par une étiquette « v0.2.0 ».
-# Compile les installeurs sous Windows, les signe avec la clé des mises à
-# jour, et crée la page de téléchargement GitHub avec latest.json, le fichier
-# que SKELVIA Pulse lit pour proposer la mise à jour.
+# Publication d'une version : à chaque envoi sur main, si la version de
+# src-tauri/tauri.conf.json n'est pas encore publiée. Compile les installeurs
+# sous Windows, les signe avec la clé des mises à jour, et crée la page de
+# téléchargement GitHub (avec l'étiquette v<version>) et latest.json, le
+# fichier que SKELVIA Pulse lit pour proposer la mise à jour.
 #
 # Réglages du dépôt nécessaires (voir docs/publier-une-version.md) :
 # - secret TAURI_SIGNING_PRIVATE_KEY : la clé privée des mises à jour ;
@@ -11,17 +12,47 @@ name: Publication
 
 on:
   push:
-    tags: ["v*"]
+    branches: [main]
 
 permissions:
   contents: write
 
+concurrency:
+  group: publication
+  cancel-in-progress: false
+
 jobs:
+  version:
+    name: Version déjà publiée ?
+    runs-on: ubuntu-24.04
+    outputs:
+      tag: ${{ steps.v.outputs.tag }}
+      publish: ${{ steps.v.outputs.publish }}
+    env:
+      RELEASES_REPO: ${{ vars.RELEASES_REPO || github.repository }}
+      GH_TOKEN: ${{ secrets.RELEASES_TOKEN || github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: v
+        run: |
+          tag="v$(node -p "require('./src-tauri/tauri.conf.json').version")"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          if gh release view "$tag" --repo "$RELEASES_REPO" > /dev/null 2>&1; then
+            echo "La version $tag est déjà publiée : rien à faire."
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Nouvelle version $tag : publication."
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+          fi
+
   windows:
     name: Publier la version
+    needs: version
+    if: needs.version.outputs.publish == 'true'
     runs-on: windows-latest
     env:
       RELEASES_REPO: ${{ vars.RELEASES_REPO || github.repository }}
+      TAG: ${{ needs.version.outputs.tag }}
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
@@ -49,14 +80,14 @@ jobs:
         run: npm run tauri build
       - name: Préparation des fichiers
         shell: bash
-        run: node scripts/preparer-publication.mjs "$GITHUB_REF_NAME" "$RELEASES_REPO"
+        run: node scripts/preparer-publication.mjs "$TAG" "$RELEASES_REPO"
       - name: Page de téléchargement
         shell: bash
         env:
           GH_TOKEN: ${{ secrets.RELEASES_TOKEN || github.token }}
         run: |
-          version="${GITHUB_REF_NAME#v}"
-          gh release create "$GITHUB_REF_NAME" publication/* \
+          gh release create "$TAG" publication/* \
             --repo "$RELEASES_REPO" \
-            --title "SKELVIA Pulse $version" \
+            --target "$GITHUB_SHA" \
+            --title "SKELVIA Pulse ${TAG#v}" \
             --notes-file notes-de-version.md

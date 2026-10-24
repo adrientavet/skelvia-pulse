@@ -6,7 +6,7 @@ Une version publiée, c'est une page de téléchargement GitHub (« Release ») 
 - l'installeur `skelvia-pulse_<version>_x64_fr-FR.msi` (déploiement par un informaticien) ;
 - `latest.json`, le petit fichier que SKELVIA Pulse lit pour proposer la mise à jour dans sa pastille.
 
-Tout est fait par le workflow `.github/workflows/publication.yml`, déclenché par une étiquette Git `v<version>`.
+Tout est fait par le workflow `.github/workflows/publication.yml` : à chaque envoi sur la branche `main`, il publie la version inscrite dans `src-tauri/tauri.conf.json` si elle ne l'est pas déjà. Il n'y a donc rien d'autre à faire que changer le numéro de version.
 
 ## Une fois pour toutes : les réglages du dépôt
 
@@ -45,15 +45,16 @@ L'application lit `latest.json` à l'adresse inscrite dans `src-tauri/tauri.conf
    - `Cargo.toml` (`[workspace.package] version`) ;
    - `package.json` (`"version"`), puis `npm install --package-lock-only` et `cargo update -w` pour les fichiers de verrouillage.
 3. Vérifiez : `cargo test --workspace` et `npm run build`.
-4. Enregistrez et publiez :
+4. Enregistrez et envoyez :
 
    ```sh
    git commit -am "Version 0.2.1"
-   git tag v0.2.1
-   git push origin main v0.2.1
+   git push origin main
    ```
 
-5. Suivez le workflow « Publication » dans l'onglet *Actions*. Il refuse de publier si l'étiquette ne correspond pas à la version, si `NOUVEAUTES.md` n'a pas la section, ou si la clé manque.
+5. Suivez le workflow « Publication » dans l'onglet *Actions*. Il crée lui-même l'étiquette `v0.2.1` et la page de téléchargement. Il refuse de publier si les trois numéros de version ne sont pas identiques, si `NOUVEAUTES.md` n'a pas la section, ou si la clé manque.
+
+Si la compilation échoue, rien n'est publié : corrigez, envoyez à nouveau, la publication repart.
 
 Les PC qui ont SKELVIA Pulse verront « mise à jour » dans la pastille au plus tard 6 heures après, ou au prochain démarrage.
 
