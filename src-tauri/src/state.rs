@@ -50,11 +50,15 @@ fn settings_path(dir: &std::path::Path) -> PathBuf {
 }
 
 pub fn load_settings(dir: &std::path::Path) -> Settings {
-    std::fs::read_to_string(settings_path(dir))
+    let mut settings = std::fs::read_to_string(settings_path(dir))
         .ok()
         .and_then(|s| serde_json::from_str::<Settings>(&s).ok())
         .unwrap_or_default()
-        .sanitized()
+        .sanitized();
+    // Les nouvelles règles valent pour la session ; elles sont écrites dans
+    // le fichier au prochain enregistrement des réglages.
+    settings.upgrade_default_rules();
+    settings
 }
 
 impl AppState {

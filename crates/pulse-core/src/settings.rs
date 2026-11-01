@@ -96,6 +96,18 @@ impl Settings {
         }
         self
     }
+
+    /// 0.2.4 : les règles proposées deviennent valables pour tout métier.
+    /// Un PC qui avait gardé telles quelles celles du bâtiment reçoit les
+    /// nouvelles ; des règles modifiées par l'utilisateur ne bougent pas.
+    /// Renvoie vrai si les règles ont changé.
+    pub fn upgrade_default_rules(&mut self) -> bool {
+        if self.rules == rules::default_rules_before_0_2_4() {
+            self.rules = rules::default_rules();
+            return true;
+        }
+        false
+    }
 }
 
 #[cfg(test)]
@@ -110,6 +122,19 @@ mod tests {
         assert!(!s.rules.is_empty());
         // Réglages écrits par une version sans mises à jour automatiques.
         assert!(s.check_updates);
+    }
+
+    #[test]
+    fn untouched_rules_are_upgraded() {
+        let mut s = Settings { rules: rules::default_rules_before_0_2_4(), ..Settings::default() };
+        assert!(s.upgrade_default_rules());
+        assert_eq!(s.rules, rules::default_rules());
+        // Des règles modifiées restent celles de l'utilisateur.
+        let mut perso = rules::default_rules_before_0_2_4();
+        perso.pop();
+        let mut s = Settings { rules: perso.clone(), ..Settings::default() };
+        assert!(!s.upgrade_default_rules());
+        assert_eq!(s.rules, perso);
     }
 
     #[test]
