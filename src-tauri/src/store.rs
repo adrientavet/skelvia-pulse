@@ -286,7 +286,7 @@ mod tests {
         let inputs = s.inputs(t(-10), t(30));
         let sum = summarize(&inputs, &Settings::default(), t(-10), t(30));
         assert!((sum.active_secs - 600.0).abs() < 1.0);
-        assert_eq!(sum.by_category[0].label, "Devis et chiffrage");
+        assert_eq!(sum.by_category[0].label, "Devis et factures");
     }
 
     #[test]

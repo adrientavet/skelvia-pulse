@@ -358,7 +358,7 @@ mod tests {
         };
         let s = summarize(&inputs, &Settings::default(), t(0), t(120));
         assert!(approx(s.active_secs, 70.0 * 60.0));
-        assert_eq!(s.by_category[0].label, "Devis et chiffrage");
+        assert_eq!(s.by_category[0].label, "Devis et factures");
         assert!(approx(s.by_category[0].secs, 40.0 * 60.0));
         assert_eq!(s.by_category[1].label, "Mails");
         assert_eq!(s.by_app[0].label, "Excel");
@@ -384,7 +384,7 @@ mod tests {
         let total: f64 = segs.iter().map(Segment::secs).sum();
         assert!(approx(total, 15.0 * 60.0));
         assert_eq!(segs[0].domain.as_deref(), Some("pointp.fr"));
-        assert_eq!(segs[0].category, "Recherche de fournisseurs");
+        assert_eq!(segs[0].category, "Achats et fournisseurs");
         assert!(segs.iter().all(|s| s.title != "Secret"));
     }
 
@@ -414,7 +414,7 @@ mod tests {
         };
         let s = summarize(&inputs, &settings, t(0), t(10));
         assert!(s.top_items.is_empty());
-        assert_eq!(s.by_category[0].label, "Factures et relances");
+        assert_eq!(s.by_category[0].label, "Devis et factures");
     }
 
     #[test]

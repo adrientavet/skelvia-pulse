@@ -2,6 +2,11 @@
 
 Les nouveautés de chaque version, de la plus récente à la plus ancienne. Le texte de la version publiée est repris sur la page de téléchargement.
 
+## 0.2.4
+
+- Des types de tâche valables pour tout métier, de l'indépendant à la PME : mails, messagerie, réunions et agenda, devis et factures, comptabilité et administratif, clients et prospection, projets et tâches, outils d'IA, réseaux sociaux, création et visuels, documents et tableurs, et d'autres.
+- Si vous n'aviez jamais modifié les règles de regroupement, elles passent toutes seules aux nouvelles. Si vous les aviez modifiées, elles restent les vôtres : le bouton « Revenir aux règles proposées », dans Réglages, donne les nouvelles.
+
 ## 0.2.3
 
 - Notre mascotte s'appelle désormais le blip : nouveau dessin en volume dans la pastille, l'application, le rapport et les icônes.

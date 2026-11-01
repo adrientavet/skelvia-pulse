@@ -2,9 +2,9 @@
 
 **Voir où part votre temps sur votre PC. Vos mesures restent chez vous.**
 
-SKELVIA Pulse est un petit logiciel gratuit et libre pour Windows 10 et 11. Il tourne en arrière-plan et mesure, **sur votre PC uniquement**, le temps passé dans chaque application, sur chaque site et dans chaque document. Il range ce temps par type de tâche (devis, factures, mails, plans et CCTP, recherche de fournisseurs…) et vous donne un rapport clair, par exemple : « 6 h par semaine sur les mails, 3 h sur les devis, 2 h sur des PDF de CCTP ».
+SKELVIA Pulse est un petit logiciel gratuit et libre pour Windows 10 et 11. Il tourne en arrière-plan et mesure, **sur votre PC uniquement**, le temps passé dans chaque application, sur chaque site et dans chaque document. Il range ce temps par type de tâche (mails, réunions, devis et factures, comptabilité, clients, projets, réseaux sociaux, outils d'IA…) et vous donne un rapport clair, par exemple : « 6 h par semaine sur les mails, 3 h en réunion, 2 h sur les devis et factures ». Il convient à toute entreprise, de l'indépendant à la PME : vous suivez votre temps de A à Z.
 
-Il est proposé par [SKELVIA](https://skelvia.fr), qui installe des assistants IA administratifs dans les TPE et PME du bâtiment.
+Il est proposé par [SKELVIA](https://skelvia.fr), qui met en service l'IA dans les TPE et PME.
 
 > ⚠️ Version 0.2, en cours de test. Elle n'a pas encore été essayée sur un vrai PC Windows : voir [Tester sur Windows](docs/tester-sur-windows.md).
 
@@ -80,8 +80,8 @@ Le titre d'une fenêtre peut contenir des informations sensibles (le sujet d'un 
 
 Le temps est rangé par des **règles simples**, modifiables dans Réglages :
 
-- **mot dans le titre** : « devis » range « Devis Martin.xlsx » dans *Devis et chiffrage* ;
-- **site web** : « pointp.fr » range ce site dans *Recherche de fournisseurs* ;
+- **mot dans le titre** : « devis » range « Devis Martin.xlsx » dans *Devis et factures* ;
+- **site web** : « linkedin.com » range ce site dans *Réseaux sociaux* ;
 - **application** : « outlook » range Outlook dans *Mails*.
 
 Les règles sont lues de haut en bas, la première qui correspond l'emporte. Le temps qu'aucune règle ne range apparaît dans « Autre ». Aucune intelligence artificielle extérieure n'est utilisée : tout se fait sur le PC. Les règles proposées au départ sont des exemples à adapter à votre entreprise.
